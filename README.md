@@ -25,3 +25,6 @@ sequenceDiagram
     Veterinário ->> Sistema: Registra observações sobre a Consulta
 ```
 
+### Diagrama de Caso de Uso
+![4PawsCasoDeUso](./docs//images/4PawsCasoDeUso.svg)
+
