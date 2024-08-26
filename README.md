@@ -28,6 +28,7 @@ sequenceDiagram
 ### Diagrama de Caso de Uso
 ![4PawsCasoDeUso](./docs//images/4PawsCasoDeUso.svg)
 
+### Diagrama de Classes
 ```mermaid
 classDiagram
     class Usuario {
