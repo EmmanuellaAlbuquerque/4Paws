@@ -7,7 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Set;
 
 @Data
-@Entity
+@Entity(name = "roles")
+
 public class Role implements GrantedAuthority {
 
     @Id

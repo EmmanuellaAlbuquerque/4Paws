@@ -27,6 +27,7 @@ public class SecurityConfiguration {
         httpSecurity.cors(Customizer.withDefaults());
         httpSecurity.authorizeHttpRequests((authz) -> {
             authz.requestMatchers(antMatcher("/auth/**")).permitAll();
+            authz.requestMatchers(antMatcher("/sign_up/**")).permitAll();
         });
 
         return httpSecurity.build();

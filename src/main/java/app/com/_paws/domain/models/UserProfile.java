@@ -1,7 +1,10 @@
 package app.com._paws.domain.models;
 
+import app.com._paws.domain.dtos.UserProfileDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,8 +13,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-@Entity
+@Entity(name = "user_profiles")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserProfile implements UserDetails {
 
     @Id
@@ -29,6 +34,13 @@ public class UserProfile implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    public UserProfile(UserProfileDTO userProfileDTO) {
+        this.email = userProfileDTO.getEmail();
+        this.password = userProfileDTO.getPassword();
+        this.name = userProfileDTO.getName();
+        this.cpf = userProfileDTO.getCpf();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

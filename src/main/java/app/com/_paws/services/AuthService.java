@@ -2,7 +2,7 @@ package app.com._paws.services;
 
 import app.com._paws.domain.dtos.LoginDTO;
 import app.com._paws.domain.models.UserProfile;
-import app.com._paws.domain.repositories.UserRepository;
+import app.com._paws.domain.repositories.UserProfileRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class AuthService {
 
-    private final UserRepository userRepository;
+    private final UserProfileRepository userProfileRepository;
 
     private final AuthenticationManager authenticationManager;
 
@@ -32,9 +32,9 @@ public class UserService {
     @Value("${jwt.expiration.token}")
     private String expirationJWT;
 
-    public UserService(@Lazy UserRepository userRepository,
+    public AuthService(@Lazy UserProfileRepository userProfileRepository,
                        @Lazy AuthenticationManager authenticationManager) {
-        this.userRepository = userRepository;
+        this.userProfileRepository = userProfileRepository;
         this.authenticationManager = authenticationManager;
     }
 
@@ -48,8 +48,8 @@ public class UserService {
         try {
             Authentication authentication = authenticationManager.authenticate(dtoLogin);
 
-            Object usuarioAutenticado = authentication.getPrincipal();
-            UserProfile userProfile = (UserProfile) usuarioAutenticado;
+            Object authenticatedUser = authentication.getPrincipal();
+            UserProfile userProfile = (UserProfile) authenticatedUser;
 
             return generateJWT(userProfile);
 
@@ -59,7 +59,7 @@ public class UserService {
     }
 
     public Optional<UserProfile> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userProfileRepository.findByEmail(email);
     }
 
     private String generateJWT(UserProfile userProfile) {

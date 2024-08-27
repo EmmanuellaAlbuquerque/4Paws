@@ -1,7 +1,7 @@
 package app.com._paws.controllers;
 
 import app.com._paws.domain.dtos.LoginDTO;
-import app.com._paws.services.UserService;
+import app.com._paws.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/login")
     public String login(@RequestBody LoginDTO loginDTO) {
-        return userService.login(loginDTO);
+        return authService.login(loginDTO);
     }
 }

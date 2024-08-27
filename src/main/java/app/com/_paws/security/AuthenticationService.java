@@ -1,7 +1,7 @@
 package app.com._paws.security;
 
 import app.com._paws.domain.models.UserProfile;
-import app.com._paws.services.UserService;
+import app.com._paws.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,11 +14,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthenticationService implements UserDetailsService {
 
-    private final UserService userService;
+    private final AuthService authService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserProfile> userOptional = userService.findByEmail(username);
+        Optional<UserProfile> userOptional = authService.findByEmail(username);
 
         if(userOptional.isPresent()) {
             return userOptional.get();
