@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Data
 @Entity(name = "roles")
-
 public class Role implements GrantedAuthority {
 
     @Id
