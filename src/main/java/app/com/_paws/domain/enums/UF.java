@@ -1,7 +1,5 @@
 package app.com._paws.domain.enums;
 
-import lombok.RequiredArgsConstructor;
-
 public enum UF {
     AC,
     AL,
