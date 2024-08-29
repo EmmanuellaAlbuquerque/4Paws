@@ -1,6 +1,7 @@
 package app.com._paws.domain.models;
 
 import app.com._paws.domain.dtos.UserProfileDTO;
+import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserProfile implements UserDetails {
+public class UserProfile implements UserDetails, Identifiable<UUID> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
