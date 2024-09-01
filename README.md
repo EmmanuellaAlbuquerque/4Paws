@@ -85,7 +85,7 @@ classDiagram
         +Sexo sexo
         +String raça
         +Especie especie
-        +LocalDateTime dataDeNascimento
+        +LocalDate dataDeNascimento
         +Tutor tutor
     }
 
