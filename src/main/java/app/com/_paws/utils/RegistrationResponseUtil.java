@@ -1,6 +1,5 @@
 package app.com._paws.utils;
 
-import app.com._paws.domain.models.UserProfile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

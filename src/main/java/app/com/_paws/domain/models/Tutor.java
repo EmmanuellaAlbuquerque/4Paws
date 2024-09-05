@@ -1,5 +1,7 @@
 package app.com._paws.domain.models;
 
+import app.com._paws.domain.dtos.TutorDTO;
+import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,7 +10,7 @@ import java.util.UUID;
 
 @Data
 @Entity(name = "tutors")
-public class Tutor {
+public class Tutor implements Identifiable<UUID> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,10 +20,16 @@ public class Tutor {
 
     private String phone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private Address address;
 
     @OneToMany(mappedBy = "tutor", fetch = FetchType.LAZY)
     private List<Pet> pets;
+
+    public Tutor(TutorDTO tutorDTO) {
+        this.name = tutorDTO.name();
+        this.phone = tutorDTO.phone();
+        this.address = tutorDTO.address();
+    }
 }

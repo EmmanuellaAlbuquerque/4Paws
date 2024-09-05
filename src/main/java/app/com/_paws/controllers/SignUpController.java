@@ -1,8 +1,11 @@
 package app.com._paws.controllers;
 
+import app.com._paws.domain.dtos.TutorDTO;
 import app.com._paws.domain.dtos.UserProfileDTO;
 import app.com._paws.domain.dtos.VeterinarianDTO;
+import app.com._paws.domain.models.Tutor;
 import app.com._paws.domain.models.UserProfile;
+import app.com._paws.services.TutorService;
 import app.com._paws.services.UserProfileService;
 import app.com._paws.services.VeterinarianService;
 import app.com._paws.utils.RegistrationResponseUtil;
@@ -17,6 +20,7 @@ public class SignUpController {
 
     private final UserProfileService userProfileService;
     private final VeterinarianService veterinarianService;
+    private final TutorService tutorService;
 
     @PostMapping("/receptionist")
     public ResponseEntity<Object> registerReceptionist(@RequestBody UserProfileDTO userProfileDTO) {
@@ -48,5 +52,13 @@ public class SignUpController {
         veterinarianService.registerVeterinarian(veterinarianDTO);
 
         return  RegistrationResponseUtil.build(userProfile);
+    }
+
+    @PostMapping("/tutor")
+    public ResponseEntity<Object> registerTutor(@RequestBody TutorDTO tutorDTO) {
+
+        Tutor tutor = tutorService.registerTutor(tutorDTO);
+
+        return RegistrationResponseUtil.build(tutor);
     }
 }
