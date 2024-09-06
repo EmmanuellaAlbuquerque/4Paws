@@ -4,12 +4,14 @@ import app.com._paws.domain.dtos.TutorDTO;
 import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 
 @Data
 @Entity(name = "tutors")
+@NoArgsConstructor
 public class Tutor implements Identifiable<UUID> {
 
     @Id
