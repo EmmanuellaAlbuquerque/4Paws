@@ -21,8 +21,8 @@ public class ServiceProvided implements Identifiable<Integer> {
 
     private Double price;
 
-    @OneToMany(mappedBy = "serviceProvided", fetch = FetchType.LAZY)
-    private List<Appointment> appointments;
+//    @OneToMany(mappedBy = "serviceProvided", fetch = FetchType.LAZY)
+//    private List<Appointment> appointments;
 
     public ServiceProvided(ServiceDTO serviceDTO) {
         this.name = serviceDTO.name();

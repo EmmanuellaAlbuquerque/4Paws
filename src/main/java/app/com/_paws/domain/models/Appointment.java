@@ -28,7 +28,13 @@ public class Appointment {
 
     private String note;
 
+    @OneToMany(mappedBy = "appointment")
+    private List<Exam> exams;
+
+    @OneToMany(mappedBy = "appointment")
+    private List<Prescription> prescriptions;
+
     @ManyToOne
-    @JoinColumn(name = "service_id")
-    private ServiceProvided serviceProvided;
+    @JoinColumn(name = "appointment_type_id")
+    private AppointmentType appointmentType;
 }
