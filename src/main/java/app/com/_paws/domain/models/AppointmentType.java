@@ -4,11 +4,13 @@ import app.com._paws.domain.dtos.ServiceTypeDTO;
 import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity(name = "appointment_types")
+@NoArgsConstructor
 public class AppointmentType implements ServiceType, Identifiable<Integer> {
 
     @Id

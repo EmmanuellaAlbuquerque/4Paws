@@ -6,6 +6,7 @@ import app.com._paws.domain.enums.Specie;
 import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Data
 @Entity(name = "pets")
+@NoArgsConstructor
 public class Pet implements Identifiable<UUID> {
 
     @Id

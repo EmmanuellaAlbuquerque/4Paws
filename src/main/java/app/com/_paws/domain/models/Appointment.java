@@ -1,12 +1,16 @@
 package app.com._paws.domain.models;
 
+import app.com._paws.domain.dtos.AppointmentDTO;
+import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 @Entity(name = "appointments")
-public class Appointment {
+public class Appointment implements Identifiable<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,15 +30,24 @@ public class Appointment {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    private String note;
+    private String notes;
 
-    @OneToMany(mappedBy = "appointment")
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
     private List<Exam> exams;
 
-    @OneToMany(mappedBy = "appointment")
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
     private List<Prescription> prescriptions;
 
     @ManyToOne
     @JoinColumn(name = "appointment_type_id")
     private AppointmentType appointmentType;
+
+    public Appointment(AppointmentDTO appointmentDTO, AppointmentType appointmentType, List<Veterinarian> veterinarians, Pet pet) {
+        this.appointmentType = appointmentType;
+        this.scheduledDate = appointmentDTO.scheduledDate();
+        this.veterinarians = veterinarians;
+        this.pet = pet;
+        this.notes = appointmentDTO.notes();
+        this.prescriptions = appointmentDTO.prescriptions();
+    }
 }
