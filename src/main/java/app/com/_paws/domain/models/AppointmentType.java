@@ -2,6 +2,7 @@ package app.com._paws.domain.models;
 
 import app.com._paws.domain.dtos.ServiceTypeDTO;
 import app.com._paws.utils.Identifiable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class AppointmentType implements ServiceType, Identifiable<Integer> {
 
     Double basePrice;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "appointmentType")
     List<Appointment> appointments;
 

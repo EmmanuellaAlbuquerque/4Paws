@@ -5,11 +5,13 @@ import app.com._paws.domain.enums.Specialty;
 import app.com._paws.domain.enums.UF;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 
+@Data
 @Entity(name = "veterinarians")
 @NoArgsConstructor
 @AllArgsConstructor

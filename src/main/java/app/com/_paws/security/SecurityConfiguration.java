@@ -39,6 +39,8 @@ public class SecurityConfiguration {
             authz.requestMatchers(antMatcher("/service/**")).hasRole("ADMIN");
             authz.requestMatchers(antMatcher("/appointment_type/**")).hasRole("ADMIN");
             authz.requestMatchers(antMatcher("/exame_type/**")).hasRole("ADMIN");
+
+            authz.requestMatchers(antMatcher("/veterinarian/**")).hasRole("VETERINARIO");
         });
 
         httpSecurity.addFilterBefore(
