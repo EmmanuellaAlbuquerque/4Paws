@@ -26,16 +26,15 @@ public class VeterinarianController {
     private final AppointmentService appointmentService;
 
     @GetMapping("/appointments")
-    public ResponseEntity<List<Appointment>> obtainAllVetAppointments() {
+    public ResponseEntity<List<AppointmentResponseDTO>> obtainAllVetAppointments() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object authenticatedVetUUIDString = authentication.getPrincipal();
         UUID vetUUID = UUID.fromString((String) authenticatedVetUUIDString);
 
         List<Appointment> appointments = this.appointmentService.findAllAppointmentsByVeterinarian(vetUUID);
-//        List<AppointmentResponseDTO> appointmentResponseDTO = AppointmentResponseDTO.fromAppointmentList(appointments);
+        List<AppointmentResponseDTO> appointmentResponseDTO = AppointmentResponseDTO.fromAppointmentList(appointments);
 
-//        return ResponseEntity.ok(appointmentResponseDTO);
-        return ResponseEntity.ok(appointments);
+        return ResponseEntity.ok(appointmentResponseDTO);
     }
 }
