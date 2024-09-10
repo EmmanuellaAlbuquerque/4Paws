@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -50,5 +51,9 @@ public class AppointmentService {
         this.examRepository.saveAll(exams);
 
         return newAppointment;
+    }
+
+    public List<Appointment> findAllAppointmentsByVeterinarian(UUID veterinarianId) {
+        return this.appointmentRepository.findByVeterinariansIdOrderByScheduledDate(veterinarianId);
     }
 }
