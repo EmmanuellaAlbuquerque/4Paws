@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,6 +55,7 @@ public class AppointmentService {
     }
 
     public List<Appointment> findAllAppointmentsByVeterinarian(UUID veterinarianId) {
-        return this.appointmentRepository.findByVeterinariansIdOrderByScheduledDate(veterinarianId);
+        return this.appointmentRepository
+                .findByVeterinariansIdAndScheduledDateGreaterThanEqualOrderByScheduledDate(veterinarianId, LocalDateTime.now());
     }
 }
