@@ -4,6 +4,7 @@ import app.com._paws.domain.dtos.PetDTO;
 import app.com._paws.domain.enums.Sex;
 import app.com._paws.domain.enums.Specie;
 import app.com._paws.utils.Identifiable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,7 @@ public class Pet implements Identifiable<UUID> {
     @JoinColumn(name = "tutor_id")
     private Tutor tutor;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 

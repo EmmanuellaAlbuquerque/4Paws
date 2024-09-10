@@ -21,7 +21,6 @@ public class Appointment implements Identifiable<Integer> {
 
     private LocalDateTime scheduledDate;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "appointment_veterinarian",
@@ -30,18 +29,15 @@ public class Appointment implements Identifiable<Integer> {
     )
     private List<Veterinarian> veterinarians;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
     private String notes;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
     private List<Exam> exams;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
     private List<Prescription> prescriptions;
 

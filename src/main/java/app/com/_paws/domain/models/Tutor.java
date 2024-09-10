@@ -2,6 +2,7 @@ package app.com._paws.domain.models;
 
 import app.com._paws.domain.dtos.TutorDTO;
 import app.com._paws.utils.Identifiable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,10 +23,12 @@ public class Tutor implements Identifiable<UUID> {
 
     private String phone;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tutor", fetch = FetchType.LAZY)
     private List<Pet> pets;
 

@@ -8,7 +8,6 @@ import lombok.Data;
 @Entity(name = "addresses")
 public class Address {
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -19,7 +18,6 @@ public class Address {
 
     private String street;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Tutor tutor;
 }

@@ -58,4 +58,16 @@ public class AppointmentService {
         return this.appointmentRepository
                 .findByVeterinariansIdAndScheduledDateGreaterThanEqualOrderByScheduledDate(veterinarianId, LocalDateTime.now());
     }
+
+    public Appointment findAppointmentByIdAndVeterinarianId(UUID veterinarianId, Integer appointmentId) {
+        Appointment appointment = this.appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new RuntimeException("Consulta não encontrada!"));
+
+        appointment.getVeterinarians().stream()
+                .filter((vet -> vet.getId().equals(veterinarianId)))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Você não possui acesso a essa consulta!"));
+
+        return appointment;
+    }
 }

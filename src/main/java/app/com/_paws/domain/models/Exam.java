@@ -3,15 +3,16 @@ package app.com._paws.domain.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @Entity(name = "exams")
+@NoArgsConstructor
 public class Exam {
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
@@ -20,6 +21,7 @@ public class Exam {
 
     LocalDateTime scheduledDate;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "exam_type_id")
     ExamType examType;
