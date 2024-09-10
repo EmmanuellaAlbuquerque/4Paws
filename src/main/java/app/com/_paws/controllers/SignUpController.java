@@ -3,6 +3,7 @@ package app.com._paws.controllers;
 import app.com._paws.domain.dtos.UserProfileDTO;
 import app.com._paws.domain.dtos.VeterinarianDTO;
 import app.com._paws.domain.models.UserProfile;
+import app.com._paws.domain.models.Veterinarian;
 import app.com._paws.services.UserProfileService;
 import app.com._paws.services.VeterinarianService;
 import app.com._paws.utils.RegistrationResponseUtil;
@@ -34,19 +35,8 @@ public class SignUpController {
 
     @PostMapping("/veterinarian")
     public ResponseEntity<Object> registerVeterinarian(@RequestBody VeterinarianDTO veterinarianDTO) {
-        UserProfileDTO userProfileDTO = new UserProfileDTO(
-                veterinarianDTO.email(),
-                veterinarianDTO.password(),
-                veterinarianDTO.name(),
-                veterinarianDTO.cpf()
-        );
+        Veterinarian veterinarian = veterinarianService.registerVeterinarian(veterinarianDTO);
 
-        UserProfile userProfile = userProfileService.registerUserProfile(
-                userProfileDTO, "ROLE_VETERINARIO"
-        );
-
-        veterinarianService.registerVeterinarian(veterinarianDTO);
-
-        return  RegistrationResponseUtil.build(userProfile);
+        return  RegistrationResponseUtil.build(veterinarian);
     }
 }

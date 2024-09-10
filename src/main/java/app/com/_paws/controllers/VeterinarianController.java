@@ -1,5 +1,6 @@
 package app.com._paws.controllers;
 
+import app.com._paws.domain.dtos.AppointmentResponseDTO;
 import app.com._paws.domain.models.Appointment;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.services.AppointmentService;
@@ -32,7 +33,9 @@ public class VeterinarianController {
         UUID vetUUID = UUID.fromString((String) authenticatedVetUUIDString);
 
         List<Appointment> appointments = this.appointmentService.findAllAppointmentsByVeterinarian(vetUUID);
+//        List<AppointmentResponseDTO> appointmentResponseDTO = AppointmentResponseDTO.fromAppointmentList(appointments);
 
+//        return ResponseEntity.ok(appointmentResponseDTO);
         return ResponseEntity.ok(appointments);
     }
 }

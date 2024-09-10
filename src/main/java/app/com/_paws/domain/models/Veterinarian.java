@@ -6,16 +6,19 @@ import app.com._paws.domain.enums.UF;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity(name = "veterinarians")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Veterinarian {
+public class Veterinarian extends UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -33,6 +36,10 @@ public class Veterinarian {
     private List<Appointment> appointments;
 
     public Veterinarian(VeterinarianDTO veterinarianDTO) {
+        super.setEmail(veterinarianDTO.email());
+        super.setName(veterinarianDTO.name());
+        super.setCpf(veterinarianDTO.cpf());
+
         this.specialty = veterinarianDTO.specialty();
         this.crmv = veterinarianDTO.crmv();
         this.uf = veterinarianDTO.uf();
