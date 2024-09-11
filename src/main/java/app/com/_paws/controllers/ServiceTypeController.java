@@ -51,4 +51,10 @@ public class ServiceTypeController {
 
         return ResponseEntity.ok(this.serviceTypeService.findOneAppointmentType(appointmentTypeId));
     }
+
+    @GetMapping("/service_types/exams_types/{examTypeId}")
+    public ResponseEntity<DetailedServiceTypeResponseDTO> obtainOneExamType(@PathVariable(value = "examTypeId") Integer examTypeId) {
+
+        return ResponseEntity.ok(this.serviceTypeService.findOneExamType(examTypeId));
+    }
 }

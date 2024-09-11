@@ -75,4 +75,12 @@ public class ServiceTypeService {
 
         return getOneServiceTypeAsDetailedDTO(appointmentType);
     }
+
+    public DetailedServiceTypeResponseDTO findOneExamType(Integer examTypeId) {
+
+        ExamType examType = this.examTypeRepository.findById(examTypeId)
+                .orElseThrow(() -> new RuntimeException("Tipo de Exame não encontrado!"));
+
+        return getOneServiceTypeAsDetailedDTO(examType);
+    }
 }
