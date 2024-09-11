@@ -1,6 +1,6 @@
 package app.com._paws.domain.dtos;
 
-public record ServiceTypeDTO(
+public record ServiceTypeDTO (
     String name,
     String description,
     Double basePrice
