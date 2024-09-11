@@ -17,7 +17,7 @@ import java.util.List;
 public class ServiceTypeController {
     private final ServiceTypeService serviceTypeService;
 
-    @PostMapping("/appointments/types/new")
+    @PostMapping("/service_types/appointments/new")
     public ResponseEntity<Object> registerAppointmentType(@RequestBody ServiceTypeDTO appointmentTypeDTO) {
 
         AppointmentType appointmentType = serviceTypeService.registerAppointmentType(appointmentTypeDTO);
@@ -25,7 +25,7 @@ public class ServiceTypeController {
         return RegistrationResponseUtil.build(appointmentType);
     }
 
-    @PostMapping("/exams/types/new")
+    @PostMapping("/service_types/exams/new")
     public ResponseEntity<Object> registerExamType(@RequestBody ServiceTypeDTO examTypeDTO) {
 
         ExamType examType = serviceTypeService.registerExamType(examTypeDTO);
@@ -33,9 +33,15 @@ public class ServiceTypeController {
         return RegistrationResponseUtil.build(examType);
     }
 
-    @GetMapping("/appointments/types")
+    @GetMapping("/service_types/appointments")
     public ResponseEntity<List<ServiceTypeResponseDTO>> obtainAllAppointmentTypes() {
 
         return ResponseEntity.ok(this.serviceTypeService.findAllAppointmentTypes());
+    }
+
+    @GetMapping("/service_types/exams")
+    public ResponseEntity<List<ServiceTypeResponseDTO>> obtainAllExamsTypes() {
+
+        return ResponseEntity.ok(this.serviceTypeService.findAllExamsTypes());
     }
 }

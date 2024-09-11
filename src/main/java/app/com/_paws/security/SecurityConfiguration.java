@@ -37,10 +37,13 @@ public class SecurityConfiguration {
             authz.requestMatchers(antMatcher("/tutors/new")).hasRole("RECEPCIONISTA");
             authz.requestMatchers(antMatcher("/pets/new")).hasRole("RECEPCIONISTA");
             authz.requestMatchers(antMatcher("/service/**")).hasRole("ADMIN");
-            authz.requestMatchers(antMatcher("/appointment_type/**")).hasRole("ADMIN");
-            authz.requestMatchers(antMatcher("/exame_type/**")).hasRole("ADMIN");
+
+            authz.requestMatchers(antMatcher("/service_types/appointments")).hasRole("RECEPCIONISTA");
+            authz.requestMatchers(antMatcher("/service_types/exams")).hasRole("VETERINARIO");
+            authz.requestMatchers(antMatcher("/service_types/**")).hasRole("ADMIN");
+
             authz.requestMatchers(antMatcher("/veterinarian/**")).hasRole("VETERINARIO");
-            authz.requestMatchers(antMatcher("/appointments/*")).hasRole("RECEPCIONISTA");
+            authz.requestMatchers(antMatcher("/appointments/**")).hasRole("RECEPCIONISTA");
         });
 
         httpSecurity.addFilterBefore(
