@@ -1,8 +1,11 @@
 package app.com._paws.domain.models;
 
+import app.com._paws.domain.dtos.IUserProfile;
 import app.com._paws.domain.dtos.VeterinarianDTO;
+import app.com._paws.domain.dtos.VeterinarianProfileResponseDTO;
 import app.com._paws.domain.enums.Specialty;
 import app.com._paws.domain.enums.UF;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +35,7 @@ public class Veterinarian extends UserProfile {
     @Enumerated(EnumType.STRING)
     private UF uf;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "veterinarians", fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 
@@ -43,5 +47,17 @@ public class Veterinarian extends UserProfile {
         this.specialty = veterinarianDTO.specialty();
         this.crmv = veterinarianDTO.crmv();
         this.uf = veterinarianDTO.uf();
+    }
+
+    public IUserProfile getDto() {
+        return new VeterinarianProfileResponseDTO(
+                super.getEmail(),
+                super.getName(),
+                super.getCpf(),
+                super.getRole().getName().replace("ROLE_", ""),
+                this.specialty,
+                this.crmv,
+                this.uf
+        );
     }
 }

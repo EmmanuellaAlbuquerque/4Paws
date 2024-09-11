@@ -1,5 +1,6 @@
 package app.com._paws.services;
 
+import app.com._paws.domain.dtos.IUserProfile;
 import app.com._paws.domain.dtos.UserProfileDTO;
 import app.com._paws.domain.models.Role;
 import app.com._paws.domain.models.UserProfile;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -29,5 +31,13 @@ public class UserProfileService {
         }
 
         return this.userProfileRepository.save(userProfile);
+    }
+
+    public IUserProfile obtainUserProfileInfo(UUID userProfileUUID) {
+
+        UserProfile userProfile = this.userProfileRepository.findById(userProfileUUID)
+                .orElseThrow(() -> new RuntimeException("Profile não encontrado!"));
+
+        return userProfile.getDto();
     }
 }

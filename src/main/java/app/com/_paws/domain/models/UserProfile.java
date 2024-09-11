@@ -1,7 +1,10 @@
 package app.com._paws.domain.models;
 
+import app.com._paws.domain.UserProfileResponseDTO;
+import app.com._paws.domain.dtos.IUserProfile;
 import app.com._paws.domain.dtos.UserProfileDTO;
 import app.com._paws.utils.Identifiable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +29,7 @@ public class UserProfile implements UserDetails, Identifiable<UUID> {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private String name;
@@ -76,5 +80,14 @@ public class UserProfile implements UserDetails, Identifiable<UUID> {
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
+    }
+
+    public IUserProfile getDto() {
+        return new UserProfileResponseDTO(
+                this.email,
+                this.name,
+                this.cpf,
+                this.role.getName().replace("ROLE_", "")
+        );
     }
 }

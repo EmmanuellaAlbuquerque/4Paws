@@ -1,5 +1,6 @@
 package app.com._paws.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +17,7 @@ public class Role implements GrantedAuthority {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role")
     private Set<UserProfile> userProfiles;
 
