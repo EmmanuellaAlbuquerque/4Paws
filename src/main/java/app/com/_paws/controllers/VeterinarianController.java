@@ -1,19 +1,17 @@
 package app.com._paws.controllers;
 
+import app.com._paws.domain.dtos.AppointmentDTOForVeterinarian;
 import app.com._paws.domain.dtos.AppointmentResponseDTO;
 import app.com._paws.domain.dtos.DetailedAppointmentResponseDTO;
 import app.com._paws.domain.models.Appointment;
-import app.com._paws.domain.models.UserProfile;
 import app.com._paws.services.AppointmentService;
 import app.com._paws.services.AuthService;
 import app.com._paws.services.VeterinarianService;
+import app.com._paws.utils.RegistrationResponseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,5 +42,14 @@ public class VeterinarianController {
         Appointment appointment = this.appointmentService.findAppointmentByIdAndVeterinarianId(vetUUID, appointmentId);
 
         return ResponseEntity.ok(DetailedAppointmentResponseDTO.getDetailedAppointmentDTOFromAppointment(appointment));
+    }
+
+    @PutMapping("/appointments/{appointmentId}")
+    public ResponseEntity<Object> veterinarianUpdateAppointment(@RequestBody AppointmentDTOForVeterinarian appointmentDTOForVeterinarian) {
+
+        UUID vetUUID = this.authService.obtainAuthenticatedUserUUID();
+        Appointment appointment = this.appointmentService.veterinarianUpdateAppointment(appointmentDTOForVeterinarian, vetUUID);
+
+        return RegistrationResponseUtil.build(appointment);
     }
 }

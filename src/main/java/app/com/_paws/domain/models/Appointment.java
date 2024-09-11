@@ -1,8 +1,7 @@
 package app.com._paws.domain.models;
 
-import app.com._paws.domain.dtos.AppointmentDTO;
+import app.com._paws.domain.dtos.AppointmentDTOForReceptionist;
 import app.com._paws.utils.Identifiable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,12 +44,10 @@ public class Appointment implements Identifiable<Integer> {
     @JoinColumn(name = "appointment_type_id")
     private AppointmentType appointmentType;
 
-    public Appointment(AppointmentDTO appointmentDTO, AppointmentType appointmentType, List<Veterinarian> veterinarians, Pet pet) {
+    public Appointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist, AppointmentType appointmentType, List<Veterinarian> veterinarians, Pet pet) {
         this.appointmentType = appointmentType;
-        this.scheduledDate = appointmentDTO.scheduledDate();
+        this.scheduledDate = appointmentDTOForReceptionist.scheduledDate();
         this.veterinarians = veterinarians;
         this.pet = pet;
-        this.notes = appointmentDTO.notes();
-        this.prescriptions = appointmentDTO.prescriptions();
     }
 }

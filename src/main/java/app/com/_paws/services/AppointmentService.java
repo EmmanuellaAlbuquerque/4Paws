@@ -1,6 +1,9 @@
 package app.com._paws.services;
 
-import app.com._paws.domain.dtos.AppointmentDTO;
+import app.com._paws.domain.dtos.AppointmentDTOForReceptionist;
+import app.com._paws.domain.dtos.AppointmentDTOForVeterinarian;
+import app.com._paws.domain.dtos.ExamDTO;
+import app.com._paws.domain.dtos.PrescriptionDTO;
 import app.com._paws.domain.models.*;
 import app.com._paws.domain.repositories.*;
 import jakarta.transaction.Transactional;
@@ -21,35 +24,22 @@ public class AppointmentService {
     private final PetRepository petRepository;
     private final ExamTypeRepository examTypeRepository;
     private final ExamRepository examRepository;
+    private final PrescriptionRepository prescriptionRepository;
 
     @Transactional
-    public Appointment registerAppointment(AppointmentDTO appointmentDTO) {
+    public Appointment receptionistRegisterAppointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
 
-        AppointmentType appointmentType = this.appointmentTypeRepository.findById(appointmentDTO.appointmentType())
+        AppointmentType appointmentType = this.appointmentTypeRepository.findById(appointmentDTOForReceptionist.appointmentType())
                 .orElseThrow(() -> new RuntimeException("Tipo de Consulta não encontrada!"));
 
-        List<Veterinarian> veterinarians = this.veterinarianRepository.findAllById(appointmentDTO.veterinarians());
+        List<Veterinarian> veterinarians = this.veterinarianRepository.findAllById(appointmentDTOForReceptionist.veterinarians());
 
-        Pet pet = this.petRepository.findById(appointmentDTO.pet())
+        Pet pet = this.petRepository.findById(appointmentDTOForReceptionist.pet())
                 .orElseThrow(() -> new RuntimeException("Pet não encontrado!"));
 
-        Appointment appointment = new Appointment(appointmentDTO, appointmentType, veterinarians, pet);
-
-        appointment.getPrescriptions().forEach((prescription) -> {
-            prescription.setAppointment(appointment);
-        });
+        Appointment appointment = new Appointment(appointmentDTOForReceptionist, appointmentType, veterinarians, pet);
 
         Appointment newAppointment = this.appointmentRepository.save(appointment);
-
-        List<Exam> exams = appointmentDTO.examTypes().stream().map((examTypeId) -> {
-
-            ExamType examType = this.examTypeRepository.findById(examTypeId)
-                    .orElseThrow(() -> new RuntimeException("Tipo do Exame não encontrado!"));
-
-            return new Exam(examType, newAppointment);
-        }).toList();
-
-        this.examRepository.saveAll(exams);
 
         return newAppointment;
     }
@@ -69,5 +59,33 @@ public class AppointmentService {
                 .orElseThrow(() -> new RuntimeException("Você não possui acesso a essa consulta!"));
 
         return appointment;
+    }
+
+    public Appointment veterinarianUpdateAppointment(AppointmentDTOForVeterinarian appointmentDTOForVeterinarian, UUID veterinarianId) {
+
+        Appointment appointment = this.findAppointmentByIdAndVeterinarianId(veterinarianId, appointmentDTOForVeterinarian.id());
+        appointment.setNotes(appointmentDTOForVeterinarian.notes());
+
+        List<PrescriptionDTO> prescriptionDTOS = appointmentDTOForVeterinarian.prescriptions();
+
+        List<Prescription> prescriptions = prescriptionDTOS.stream().map((prescriptionDTO -> {
+            return new Prescription(prescriptionDTO, appointment);
+        })).toList();
+
+        this.prescriptionRepository.saveAll(prescriptions);
+
+        List<ExamDTO> examsDTOS = appointmentDTOForVeterinarian.exams();
+
+        List<Exam> exams = examsDTOS.stream().map((examDTO) -> {
+
+            ExamType examType = this.examTypeRepository.findById(examDTO.examTypeId())
+                    .orElseThrow(() -> new RuntimeException("Tipo do Exame não encontrado!"));
+
+            return new Exam(examType, appointment);
+        }).toList();
+
+        this.examRepository.saveAll(exams);
+
+        return this.appointmentRepository.save(appointment);
     }
 }

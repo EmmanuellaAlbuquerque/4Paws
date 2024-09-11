@@ -1,5 +1,6 @@
 package app.com._paws.domain.models;
 
+import app.com._paws.domain.dtos.ExamDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Exam {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
@@ -31,8 +33,8 @@ public class Exam {
     @JoinColumn(name = "appointment_id")
     Appointment appointment;
 
-    public Exam(ExamType examType, Appointment newAppointment) {
+    public Exam(ExamType examType, Appointment appointment) {
         this.examType = examType;
-        this.appointment = newAppointment;
+        this.appointment = appointment;
     }
 }
