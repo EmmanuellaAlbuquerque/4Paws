@@ -1,5 +1,6 @@
 package app.com._paws.services;
 
+import app.com._paws.domain.dtos.DetailedServiceTypeResponseDTO;
 import app.com._paws.domain.dtos.ServiceTypeDTO;
 import app.com._paws.domain.dtos.ServiceTypeResponseDTO;
 import app.com._paws.domain.models.AppointmentType;
@@ -31,26 +32,47 @@ public class ServiceTypeService {
         return this.appointmentTypeRepository.save(appointmentType);
     }
 
-    private List<ServiceTypeResponseDTO> getAllServiceTypes(List<? extends ServiceType> serviceTypes) {
+    private List<ServiceTypeResponseDTO> getAllServiceTypesAsDTO(List<? extends ServiceType> serviceTypes) {
         return serviceTypes.stream().map((serviceType) -> {
-            return new ServiceTypeResponseDTO(
-                    serviceType.getId(),
-                    serviceType.getName()
-            );
+            return this.getOneServiceTypeAsDTO(serviceType);
         }).toList();
+    }
+
+    private ServiceTypeResponseDTO getOneServiceTypeAsDTO(ServiceType serviceType) {
+        return new ServiceTypeResponseDTO(
+                serviceType.getId(),
+                serviceType.getName()
+        );
+    }
+
+    private DetailedServiceTypeResponseDTO getOneServiceTypeAsDetailedDTO(ServiceType serviceType) {
+        return new DetailedServiceTypeResponseDTO(
+                serviceType.getId(),
+                serviceType.getName(),
+                serviceType.getDescription(),
+                serviceType.getBasePrice()
+        );
     }
 
     public List<ServiceTypeResponseDTO> findAllAppointmentTypes() {
 
         List<AppointmentType> appointmentTypes = this.appointmentTypeRepository.findAll();
 
-        return this.getAllServiceTypes(appointmentTypes);
+        return this.getAllServiceTypesAsDTO(appointmentTypes);
     }
 
     public List<ServiceTypeResponseDTO> findAllExamsTypes() {
 
         List<ExamType> examTypes = this.examTypeRepository.findAll();
 
-        return this.getAllServiceTypes(examTypes);
+        return this.getAllServiceTypesAsDTO(examTypes);
+    }
+
+    public DetailedServiceTypeResponseDTO findOneAppointmentType(Integer appointmentTypeId) {
+
+        AppointmentType appointmentType = this.appointmentTypeRepository.findById(appointmentTypeId)
+                .orElseThrow(() -> new RuntimeException("Tipo de consulta não encontrado!"));
+
+        return getOneServiceTypeAsDetailedDTO(appointmentType);
     }
 }
