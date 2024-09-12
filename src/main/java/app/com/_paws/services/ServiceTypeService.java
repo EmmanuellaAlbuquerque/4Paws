@@ -8,6 +8,7 @@ import app.com._paws.domain.models.ExamType;
 import app.com._paws.domain.models.ServiceType;
 import app.com._paws.domain.repositories.AppointmentTypeRepository;
 import app.com._paws.domain.repositories.ExamTypeRepository;
+import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -71,7 +72,7 @@ public class ServiceTypeService {
     public DetailedServiceTypeResponseDTO findOneAppointmentType(Integer appointmentTypeId) {
 
         AppointmentType appointmentType = this.appointmentTypeRepository.findById(appointmentTypeId)
-                .orElseThrow(() -> new RuntimeException("Tipo de consulta não encontrado!"));
+                .orElseThrow(() -> new NotFoundException("Tipo de consulta não encontrado!"));
 
         return getOneServiceTypeAsDetailedDTO(appointmentType);
     }
@@ -79,7 +80,7 @@ public class ServiceTypeService {
     public DetailedServiceTypeResponseDTO findOneExamType(Integer examTypeId) {
 
         ExamType examType = this.examTypeRepository.findById(examTypeId)
-                .orElseThrow(() -> new RuntimeException("Tipo de Exame não encontrado!"));
+                .orElseThrow(() -> new NotFoundException("Tipo de Exame não encontrado!"));
 
         return getOneServiceTypeAsDetailedDTO(examType);
     }

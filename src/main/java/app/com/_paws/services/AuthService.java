@@ -3,6 +3,7 @@ package app.com._paws.services;
 import app.com._paws.domain.dtos.LoginDTO;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.domain.repositories.UserProfileRepository;
+import app.com._paws.exceptions.BusinessException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -58,7 +59,7 @@ public class AuthService {
             return generateJWT(userProfile);
 
         } catch (AuthenticationException ex) {
-            throw new RuntimeException("Usuário e senha inválidos");
+            throw new BusinessException("Usuário e senha inválidos");
         }
     }
 

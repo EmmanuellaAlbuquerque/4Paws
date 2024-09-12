@@ -6,6 +6,7 @@ import app.com._paws.domain.models.Role;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.domain.repositories.RoleRepository;
 import app.com._paws.domain.repositories.UserProfileRepository;
+import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class UserProfileService {
     public IUserProfile obtainUserProfileInfo(UUID userProfileUUID) {
 
         UserProfile userProfile = this.userProfileRepository.findById(userProfileUUID)
-                .orElseThrow(() -> new RuntimeException("Profile não encontrado!"));
+                .orElseThrow(() -> new NotFoundException("Profile não encontrado!"));
 
         return userProfile.getDto();
     }

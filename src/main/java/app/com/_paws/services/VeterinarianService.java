@@ -6,6 +6,7 @@ import app.com._paws.domain.models.Role;
 import app.com._paws.domain.models.Veterinarian;
 import app.com._paws.domain.repositories.RoleRepository;
 import app.com._paws.domain.repositories.VeterinarianRepository;
+import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class VeterinarianService {
 
     public List<Appointment> findAllVetAppointments(UUID veterinarianUUID) {
         Veterinarian veterinarian = this.veterinarianRepository.findById(veterinarianUUID)
-                .orElseThrow(() -> new RuntimeException("Veterinário não existente!"));
+                .orElseThrow(() -> new NotFoundException("Veterinário não existente!"));
 
         List<Appointment> appointments = veterinarian.getAppointments();
 

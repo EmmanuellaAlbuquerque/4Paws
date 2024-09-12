@@ -6,6 +6,7 @@ import app.com._paws.domain.dtos.ExamDTO;
 import app.com._paws.domain.dtos.PrescriptionDTO;
 import app.com._paws.domain.models.*;
 import app.com._paws.domain.repositories.*;
+import app.com._paws.exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,12 @@ public class AppointmentService {
     public Appointment receptionistRegisterAppointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
 
         AppointmentType appointmentType = this.appointmentTypeRepository.findById(appointmentDTOForReceptionist.appointmentType())
-                .orElseThrow(() -> new RuntimeException("Tipo de Consulta não encontrada!"));
+                .orElseThrow(() -> new NotFoundException("Tipo de Consulta não encontrada!"));
 
         List<Veterinarian> veterinarians = this.veterinarianRepository.findAllById(appointmentDTOForReceptionist.veterinarians());
 
         Pet pet = this.petRepository.findById(appointmentDTOForReceptionist.pet())
-                .orElseThrow(() -> new RuntimeException("Pet não encontrado!"));
+                .orElseThrow(() -> new NotFoundException("Pet não encontrado!"));
 
         Appointment appointment = new Appointment(appointmentDTOForReceptionist, appointmentType, veterinarians, pet);
 
@@ -51,7 +52,7 @@ public class AppointmentService {
 
     public Appointment findAppointmentByIdAndVeterinarianId(UUID veterinarianId, Integer appointmentId) {
         Appointment appointment = this.appointmentRepository.findByIdAndVeterinariansId(appointmentId, veterinarianId)
-                .orElseThrow(() -> new RuntimeException("Consulta não encontrada!"));
+                .orElseThrow(() -> new NotFoundException("Consulta não encontrada!"));
 
         return appointment;
     }
@@ -74,7 +75,7 @@ public class AppointmentService {
         List<Exam> exams = examsDTOS.stream().map((examDTO) -> {
 
             ExamType examType = this.examTypeRepository.findById(examDTO.examTypeId())
-                    .orElseThrow(() -> new RuntimeException("Tipo do Exame não encontrado!"));
+                    .orElseThrow(() -> new NotFoundException("Tipo do Exame não encontrado!"));
 
             return new Exam(examType, appointment);
         }).toList();

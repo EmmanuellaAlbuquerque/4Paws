@@ -6,6 +6,7 @@ import app.com._paws.domain.models.Pet;
 import app.com._paws.domain.models.Tutor;
 import app.com._paws.domain.repositories.PetRepository;
 import app.com._paws.domain.repositories.TutorRepository;
+import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class PetService {
     public Pet registerPet(PetDTO petDTO){
 
         Tutor tutor = tutorRepository.findById(petDTO.tutorId())
-                .orElseThrow(() -> new RuntimeException("Tutor não encontrado!"));
+                .orElseThrow(() -> new NotFoundException("Tutor não encontrado!"));
 
         Pet pet = new Pet(petDTO, tutor);
 
@@ -32,7 +33,7 @@ public class PetService {
     public DetailedPetResponseDTO findPetById(UUID petId) {
 
         Pet pet = this.petRepository.findById(petId)
-                .orElseThrow(() -> new RuntimeException("Pet não encontrado!"));
+                .orElseThrow(() -> new NotFoundException("Pet não encontrado!"));
 
         return DetailedPetResponseDTO.fromPet(pet);
     }
