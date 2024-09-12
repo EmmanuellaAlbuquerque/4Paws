@@ -1,5 +1,6 @@
 package app.com._paws.controllers;
 
+import app.com._paws.domain.dtos.DetailedPetResponseDTO;
 import app.com._paws.domain.dtos.PetDTO;
 import app.com._paws.domain.models.Pet;
 import app.com._paws.services.PetService;
@@ -26,7 +27,7 @@ public class PetController {
     }
 
     @GetMapping("/{petId}")
-    public ResponseEntity<PetDTO> obtainOnePet(@PathVariable(value = "petId") UUID petId) {
+    public ResponseEntity<DetailedPetResponseDTO> obtainOnePet(@PathVariable(value = "petId") UUID petId) {
 
         return ResponseEntity.ok(this.petService.findPetById(petId));
     }

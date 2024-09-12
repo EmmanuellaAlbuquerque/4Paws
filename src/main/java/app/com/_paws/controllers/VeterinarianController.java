@@ -41,7 +41,8 @@ public class VeterinarianController {
         UUID vetUUID = this.authService.obtainAuthenticatedUserUUID();
         Appointment appointment = this.appointmentService.findAppointmentByIdAndVeterinarianId(vetUUID, appointmentId);
 
-        return ResponseEntity.ok(DetailedAppointmentResponseDTO.getDetailedAppointmentDTOFromAppointment(appointment));
+        DetailedAppointmentResponseDTO detailedAppointmentResponseDTO = DetailedAppointmentResponseDTO.getDetailedAppointmentDTOFromAppointment(appointment);
+        return ResponseEntity.ok(detailedAppointmentResponseDTO);
     }
 
     @PutMapping("/appointments/{appointmentId}")

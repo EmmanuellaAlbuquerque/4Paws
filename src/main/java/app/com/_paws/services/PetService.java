@@ -1,5 +1,6 @@
 package app.com._paws.services;
 
+import app.com._paws.domain.dtos.DetailedPetResponseDTO;
 import app.com._paws.domain.dtos.PetDTO;
 import app.com._paws.domain.models.Pet;
 import app.com._paws.domain.models.Tutor;
@@ -28,11 +29,11 @@ public class PetService {
         return this.petRepository.save(pet);
     }
 
-    public PetDTO findPetById(UUID petId) {
+    public DetailedPetResponseDTO findPetById(UUID petId) {
 
         Pet pet = this.petRepository.findById(petId)
                 .orElseThrow(() -> new RuntimeException("Pet não encontrado!"));
 
-        return PetDTO.fromPet(pet);
+        return DetailedPetResponseDTO.fromPet(pet);
     }
 }
