@@ -52,9 +52,9 @@ INSERT INTO APPOINTMENT_TYPES (BASE_PRICE, ID, DESCRIPTION, NAME) VALUES
 
 -- Insert data into APPOINTMENTS table
 INSERT INTO APPOINTMENTS (APPOINTMENT_TYPE_ID, ID, SCHEDULED_DATE, PET_ID, NOTES) VALUES
-(3, 1, '2024-09-12 09:00:00', '54c015f4-8309-4af6-9ba5-2f9598310bfe', 'Remoção de tumor benigno'),
-(1, 3, '2024-09-10 16:00:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Checkup anual'),
-(1, 4, '2024-09-09 11:00:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Checkup mensal'),
+(3, 1, '2024-09-29 09:00:00', '54c015f4-8309-4af6-9ba5-2f9598310bfe', 'Remoção de tumor benigno'),
+(1, 3, '2024-09-30 16:00:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Checkup anual'),
+(1, 4, '2024-09-22 11:00:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Checkup mensal'),
 (2, 2, '2024-09-11 14:30:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Vacinação contra raiva');
 
 -- Insert data into APPOINTMENT_VETERINARIAN table

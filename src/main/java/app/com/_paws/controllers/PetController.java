@@ -6,10 +6,9 @@ import app.com._paws.services.PetService;
 import app.com._paws.utils.RegistrationResponseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +23,11 @@ public class PetController {
         Pet pet = this.petService.registerPet(petDTO);
 
         return RegistrationResponseUtil.build(pet);
+    }
+
+    @GetMapping("/{petId}")
+    public ResponseEntity<PetDTO> obtainOnePet(@PathVariable(value = "petId") UUID petId) {
+
+        return ResponseEntity.ok(this.petService.findPetById(petId));
     }
 }

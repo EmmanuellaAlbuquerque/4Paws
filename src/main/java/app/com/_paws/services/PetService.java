@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +26,13 @@ public class PetService {
         Pet pet = new Pet(petDTO, tutor);
 
         return this.petRepository.save(pet);
+    }
+
+    public PetDTO findPetById(UUID petId) {
+
+        Pet pet = this.petRepository.findById(petId)
+                .orElseThrow(() -> new RuntimeException("Pet não encontrado!"));
+
+        return PetDTO.fromPet(pet);
     }
 }
