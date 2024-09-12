@@ -59,7 +59,7 @@ public class AuthService {
             return generateJWT(userProfile);
 
         } catch (AuthenticationException ex) {
-            throw new BusinessException("Usuário e senha inválidos");
+            throw new BusinessException("Email e/ou senha inválida!");
         }
     }
 

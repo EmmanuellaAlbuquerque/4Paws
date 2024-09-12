@@ -15,11 +15,22 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException notFoundException) {
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        return this.handleExceptions(notFoundException, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException businessException) {
+
+        return this.handleExceptions(businessException, HttpStatus.UNAUTHORIZED);
+    }
+
+    private ResponseEntity<ErrorResponse> handleExceptions(RuntimeException runtimeException, HttpStatus httpStatus) {
+
+        return ResponseEntity.status(httpStatus).body(
                 new ErrorResponse(
                         LocalDateTime.now(),
-                        HttpStatus.NOT_FOUND.value(),
-                        Map.of("message", notFoundException.getMessage())
+                        httpStatus.value(),
+                        Map.of("message", runtimeException.getMessage())
                 )
         );
     }
