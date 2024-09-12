@@ -18,7 +18,7 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private Set<UserProfile> userProfiles;
 
     @Override

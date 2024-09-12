@@ -24,12 +24,12 @@ public class Exam {
     LocalDateTime scheduledDate;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_type_id")
     ExamType examType;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appointment_id")
     Appointment appointment;
 

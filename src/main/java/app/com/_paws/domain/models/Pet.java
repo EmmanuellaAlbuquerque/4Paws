@@ -37,7 +37,7 @@ public class Pet implements Identifiable<UUID> {
     private LocalDate birthDate;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tutor_id")
     private Tutor tutor;
 

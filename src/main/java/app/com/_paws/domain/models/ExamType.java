@@ -25,7 +25,7 @@ public class ExamType implements ServiceType, Identifiable<Integer> {
     Double basePrice;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "examType")
+    @OneToMany(mappedBy = "examType", fetch = FetchType.LAZY)
     List<Exam> exams;
 
     public ExamType(ServiceTypeDTO examTypeDTO) {

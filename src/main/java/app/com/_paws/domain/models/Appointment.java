@@ -20,7 +20,7 @@ public class Appointment implements Identifiable<Integer> {
 
     private LocalDateTime scheduledDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "appointment_veterinarian",
             joinColumns = @JoinColumn(name = "appointment_id"),
@@ -28,19 +28,19 @@ public class Appointment implements Identifiable<Integer> {
     )
     private List<Veterinarian> veterinarians;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
     private String notes;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Exam> exams;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Prescription> prescriptions;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appointment_type_id")
     private AppointmentType appointmentType;
 

@@ -12,7 +12,7 @@ public record DetailedAppointmentResponseDTO(
         Integer id,
         LocalDateTime scheduledDate,
         List<String> veterinarians,
-        Pet pet,
+        PetDTO pet,
         String notes,
         String appointmentType,
         List<ExamResponseDTO> exams,
@@ -26,7 +26,7 @@ public record DetailedAppointmentResponseDTO(
                 appointment.getVeterinarians().stream().map((veterinarian -> {
                     return veterinarian.getName();
                 })).toList(),
-                appointment.getPet(),
+                PetDTO.fromPet(appointment.getPet()),
                 appointment.getNotes(),
                 appointment.getAppointmentType().getName(),
                 appointment.getExams().stream()

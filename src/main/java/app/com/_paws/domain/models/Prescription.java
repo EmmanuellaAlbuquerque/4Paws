@@ -23,7 +23,7 @@ public class Prescription {
     String dosageDescription;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appointment_id")
     Appointment appointment;
 

@@ -25,7 +25,7 @@ public class AppointmentType implements ServiceType, Identifiable<Integer> {
     Double basePrice;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "appointmentType")
+    @OneToMany(mappedBy = "appointmentType", fetch = FetchType.LAZY)
     List<Appointment> appointments;
 
     public AppointmentType(ServiceTypeDTO examTypeDTO) {

@@ -19,6 +19,6 @@ public class Address {
     private String street;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Tutor tutor;
 }
