@@ -18,6 +18,7 @@ public class Address {
 
     private String street;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Tutor tutor;
 }

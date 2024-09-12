@@ -34,7 +34,7 @@ public class SecurityConfiguration {
             authz.requestMatchers(antMatcher("/profile/**")).permitAll();
             authz.requestMatchers(antMatcher("/sign_up/receptionist")).hasRole("ADMIN");
             authz.requestMatchers(antMatcher("/sign_up/veterinarian")).hasRole("ADMIN");
-            authz.requestMatchers(antMatcher("/tutors/new")).hasRole("RECEPCIONISTA");
+            authz.requestMatchers(antMatcher("/tutors/**")).hasRole("RECEPCIONISTA");
             authz.requestMatchers(antMatcher("/pets/new")).hasRole("RECEPCIONISTA");
             authz.requestMatchers(antMatcher("/service/**")).hasRole("ADMIN");
 

@@ -36,6 +36,7 @@ public class Pet implements Identifiable<UUID> {
 
     private LocalDate birthDate;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "tutor_id")
     private Tutor tutor;

@@ -23,12 +23,12 @@ public class Tutor implements Identifiable<UUID> {
 
     private String phone;
 
-    @JsonIgnore
+    private String cpf;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "tutor", fetch = FetchType.LAZY)
     private List<Pet> pets;
 

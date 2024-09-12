@@ -9,4 +9,5 @@ import java.util.UUID;
 @Repository
 public interface TutorRepository extends JpaRepository<Tutor, UUID> {
 
+    public Tutor findByCpf(String cpf);
 }

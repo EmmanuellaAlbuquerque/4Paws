@@ -34,10 +34,10 @@ INSERT INTO ADDRESSES (ID, NUMBER, NEIGHBORHOOD, STREET) VALUES
 (3, '789', 'Jardim', 'Rua das Flores');
 
 -- Insert data into TUTORS table
-INSERT INTO TUTORS (ADDRESS_ID, ID, NAME, PHONE) VALUES
-(1, '02ed9f8b-e529-4eb5-81c1-9ae78588d283', 'João Silva', '(83) 99999-1111'),
-(2, '12971a56-5bcf-4527-8f92-9a12d2b76cb4', 'Maria Oliveira', '(83) 99999-2222'),
-(3, 'a049b975-bb29-478f-8e37-abc7629e9e7c', 'Carlos Santos', '(83) 99999-3333');
+INSERT INTO TUTORS (ADDRESS_ID, ID, NAME, PHONE, CPF) VALUES
+(1, '02ed9f8b-e529-4eb5-81c1-9ae78588d283', 'João Silva', '(83) 99999-1111', '111.111.111-11'),
+(2, '12971a56-5bcf-4527-8f92-9a12d2b76cb4', 'Maria Oliveira', '(83) 99999-2222', '333.333.333-33'),
+(3, 'a049b975-bb29-478f-8e37-abc7629e9e7c', 'Carlos Santos', '(83) 99999-3333', '222.222.222-22');
 
 -- Insert data into PETS table
 INSERT INTO PETS (BIRTH_DATE, WEIGHT, ID, TUTOR_ID, BREED, NAME, SEX, SPECIE) VALUES
