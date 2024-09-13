@@ -18,10 +18,13 @@ public class AppointmentType implements ServiceType, Identifiable<Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
+    @Column(nullable = false, unique = true)
     String name;
 
+    @Column(nullable = false)
     String description;
 
+    @Column(name = "base_price", nullable = false)
     Double basePrice;
 
     @JsonIgnore

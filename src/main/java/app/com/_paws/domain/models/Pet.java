@@ -22,6 +22,7 @@ public class Pet implements Identifiable<UUID> {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     private String name;
 
     private Double weight;
@@ -34,11 +35,12 @@ public class Pet implements Identifiable<UUID> {
     @Enumerated(EnumType.STRING)
     private Specie specie;
 
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tutor_id")
+    @JoinColumn(name = "tutor_id", nullable = false)
     private Tutor tutor;
 
     @JsonIgnore

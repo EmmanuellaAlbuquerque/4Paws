@@ -18,14 +18,17 @@ public class Tutor implements Identifiable<UUID> {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @OneToMany(mappedBy = "tutor", fetch = FetchType.LAZY)

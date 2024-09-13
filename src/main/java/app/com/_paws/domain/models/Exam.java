@@ -21,16 +21,17 @@ public class Exam {
 
     String result;
 
+    @Column(name = "scheduled_date")
     LocalDateTime scheduledDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exam_type_id")
+    @JoinColumn(name = "exam_type_id", nullable = false)
     ExamType examType;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appointment_id")
+    @JoinColumn(name = "appointment_id", nullable = false)
     Appointment appointment;
 
     public Exam(ExamType examType, Appointment appointment) {

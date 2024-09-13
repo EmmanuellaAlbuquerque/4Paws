@@ -29,6 +29,7 @@ public class Veterinarian extends UserProfile {
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
 
+    @Column(nullable = false)
     private long crmv;
 
     @Enumerated(EnumType.STRING)

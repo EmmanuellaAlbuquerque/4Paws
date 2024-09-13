@@ -18,6 +18,7 @@ public class Appointment implements Identifiable<Integer> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "scheduled_date", nullable = false)
     private LocalDateTime scheduledDate;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -29,7 +30,7 @@ public class Appointment implements Identifiable<Integer> {
     private List<Veterinarian> veterinarians;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_id")
+    @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
 
     private String notes;
@@ -41,7 +42,7 @@ public class Appointment implements Identifiable<Integer> {
     private List<Prescription> prescriptions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appointment_type_id")
+    @JoinColumn(name = "appointment_type_id", nullable = false)
     private AppointmentType appointmentType;
 
     public Appointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist, AppointmentType appointmentType, List<Veterinarian> veterinarians, Pet pet) {

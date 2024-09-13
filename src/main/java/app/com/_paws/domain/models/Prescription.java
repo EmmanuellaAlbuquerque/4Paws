@@ -18,13 +18,15 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
 
+    @Column(nullable = false)
     String medicine;
 
+    @Column(name = "dosage_description", nullable = false)
     String dosageDescription;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appointment_id")
+    @JoinColumn(name = "appointment_id", nullable = false)
     Appointment appointment;
 
     public Prescription(PrescriptionDTO prescriptionDTO, Appointment appointment) {
