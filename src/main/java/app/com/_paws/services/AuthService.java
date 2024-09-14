@@ -4,6 +4,7 @@ import app.com._paws.domain.dtos.LoginDTO;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.domain.repositories.UserProfileRepository;
 import app.com._paws.exceptions.BusinessException;
+import app.com._paws.exceptions.JWTAuthException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -59,7 +60,7 @@ public class AuthService {
             return generateJWT(userProfile);
 
         } catch (AuthenticationException ex) {
-            throw new BusinessException("Email e/ou senha inválida!");
+            throw new JWTAuthException("Email e/ou senha inválida!");
         }
     }
 

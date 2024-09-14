@@ -5,7 +5,9 @@ import app.com._paws.domain.models.Appointment;
 import app.com._paws.domain.models.Role;
 import app.com._paws.domain.models.Veterinarian;
 import app.com._paws.domain.repositories.RoleRepository;
+import app.com._paws.domain.repositories.UserProfileRepository;
 import app.com._paws.domain.repositories.VeterinarianRepository;
+import app.com._paws.exceptions.BusinessException;
 import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,10 +22,21 @@ import java.util.UUID;
 public class VeterinarianService {
 
     private final VeterinarianRepository veterinarianRepository;
+    private final UserProfileRepository userProfileRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     public Veterinarian registerVeterinarian(VeterinarianDTO veterinarianDTO) {
+        this.userProfileRepository.findByCpf(veterinarianDTO.cpf())
+                .ifPresent((userProfile -> {
+                    throw new BusinessException("'" + userProfile.getCpf() + "'" + " - CPF já está em uso!");
+                }));
+
+        this.userProfileRepository.findByEmail(veterinarianDTO.email())
+                .ifPresent((userProfile -> {
+                    throw new BusinessException("'" + userProfile.getEmail() + "'" + " - Email já está em uso!");
+                }));
+
         Veterinarian veterinarian = new Veterinarian(veterinarianDTO);
 
         Optional<Role> roleOptional = roleRepository.findByName("ROLE_VETERINARIO");

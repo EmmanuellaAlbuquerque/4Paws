@@ -8,6 +8,7 @@ import app.com._paws.domain.models.ExamType;
 import app.com._paws.domain.models.ServiceType;
 import app.com._paws.domain.repositories.AppointmentTypeRepository;
 import app.com._paws.domain.repositories.ExamTypeRepository;
+import app.com._paws.exceptions.BusinessException;
 import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,22 @@ public class ServiceTypeService {
     private final AppointmentTypeRepository appointmentTypeRepository;
 
     public ExamType registerExamType(ServiceTypeDTO examTypeDTO) {
+        this.examTypeRepository.findByName(examTypeDTO.name())
+                .ifPresent((examType) -> {
+                    throw new BusinessException("'" + examType.getName() + "'" + " - Tipo de Exame já cadastrado!");
+                });
+
         ExamType examType = new ExamType(examTypeDTO);
 
         return this.examTypeRepository.save(examType);
     }
 
     public AppointmentType registerAppointmentType(ServiceTypeDTO appointmentTypeDTO) {
+        this.appointmentTypeRepository.findByName(appointmentTypeDTO.name())
+                .ifPresent((appointmentType) -> {
+                    throw new BusinessException("'" + appointmentType.getName() + "'" + " - Tipo de Consulta já cadastrada!");
+                });
+
         AppointmentType appointmentType = new AppointmentType(appointmentTypeDTO);
 
         return this.appointmentTypeRepository.save(appointmentType);

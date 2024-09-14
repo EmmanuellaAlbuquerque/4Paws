@@ -6,6 +6,7 @@ import app.com._paws.domain.models.Role;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.domain.repositories.RoleRepository;
 import app.com._paws.domain.repositories.UserProfileRepository;
+import app.com._paws.exceptions.BusinessException;
 import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +24,16 @@ public class UserProfileService {
     private final PasswordEncoder passwordEncoder;
 
     public UserProfile registerUserProfile(UserProfileDTO userProfileDTO, String roleType) {
+        this.userProfileRepository.findByCpf(userProfileDTO.getCpf())
+                .ifPresent((userProfile -> {
+                    throw new BusinessException("'" + userProfile.getCpf() + "'" + " - CPF já está em uso!");
+                }));
+
+        this.userProfileRepository.findByEmail(userProfileDTO.getEmail())
+                .ifPresent((userProfile -> {
+                    throw new BusinessException("'" + userProfile.getEmail() + "'" + " - Email já está em uso!");
+                }));
+
         userProfileDTO.setPassword(passwordEncoder.encode(userProfileDTO.getPassword()));
         UserProfile userProfile = new UserProfile(userProfileDTO);
         Optional<Role> roleOptional = roleRepository.findByName(roleType);
