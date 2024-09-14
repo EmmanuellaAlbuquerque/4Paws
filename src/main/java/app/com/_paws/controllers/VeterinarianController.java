@@ -8,6 +8,7 @@ import app.com._paws.services.AppointmentService;
 import app.com._paws.services.AuthService;
 import app.com._paws.services.VeterinarianService;
 import app.com._paws.utils.RegistrationResponseUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +47,7 @@ public class VeterinarianController {
     }
 
     @PutMapping("/appointments/{appointmentId}")
-    public ResponseEntity<Object> veterinarianUpdateAppointment(@RequestBody AppointmentDTOForVeterinarian appointmentDTOForVeterinarian) {
+    public ResponseEntity<Object> veterinarianUpdateAppointment(@Valid @RequestBody AppointmentDTOForVeterinarian appointmentDTOForVeterinarian) {
 
         UUID vetUUID = this.authService.obtainAuthenticatedUserUUID();
         Appointment appointment = this.appointmentService.veterinarianUpdateAppointment(appointmentDTOForVeterinarian, vetUUID);

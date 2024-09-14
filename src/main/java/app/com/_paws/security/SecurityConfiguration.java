@@ -4,6 +4,7 @@ import app.com._paws.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -35,7 +36,7 @@ public class SecurityConfiguration {
             authz.requestMatchers(antMatcher("/sign_up/receptionist")).hasRole("ADMIN");
             authz.requestMatchers(antMatcher("/sign_up/veterinarian")).hasRole("ADMIN");
             authz.requestMatchers(antMatcher("/tutors/**")).hasRole("RECEPCIONISTA");
-            authz.requestMatchers(antMatcher("/pets/{petId}")).hasRole("VETERINARIO");
+            authz.requestMatchers(antMatcher(HttpMethod.GET, "/pets/**")).hasAnyRole("VETERINARIO", "RECEPCIONISTA");;
             authz.requestMatchers(antMatcher("/pets/**")).hasRole("RECEPCIONISTA");
             authz.requestMatchers(antMatcher("/service/**")).hasRole("ADMIN");
 

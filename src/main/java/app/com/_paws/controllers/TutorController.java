@@ -5,11 +5,10 @@ import app.com._paws.domain.dtos.TutorResponseDTO;
 import app.com._paws.domain.models.Tutor;
 import app.com._paws.services.TutorService;
 import app.com._paws.utils.RegistrationResponseUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +18,7 @@ public class TutorController {
     private final TutorService tutorService;
 
     @PostMapping("/new")
-    public ResponseEntity<Object> registerTutor(@RequestBody TutorDTO tutorDTO) {
+    public ResponseEntity<Object> registerTutor(@Valid @RequestBody TutorDTO tutorDTO) {
 
         Tutor tutor = tutorService.registerTutor(tutorDTO);
 

@@ -11,16 +11,16 @@ INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
     VALUES (1, '72252574-f9f2-4569-a3c3-80675bd5fb36', '000.000.000-00', 'manu@gmail.com', 'Emmanuella Albuquerque', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
 
 INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
-    VALUES (3, 'b1b2f126-ab19-4503-b210-f00caede98c0', '000.000.000-00', 'email@example.com', 'Recepcionista 1', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+    VALUES (3, 'b1b2f126-ab19-4503-b210-f00caede98c0', '100.000.000-00', 'email@example.com', 'Recepcionista 1', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
 
 INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
-    VALUES (2, 'f87bb204-2545-4f41-90f7-48badbb5bae5', '000.000.000-00', 'vet@example.com', 'Veterinário 1', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+    VALUES (2, 'f87bb204-2545-4f41-90f7-48badbb5bae5', '200.000.000-00', 'vet@example.com', 'Veterinário 1', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
 
 INSERT INTO veterinarians (id, crmv, specialty, uf)
     VALUES ('f87bb204-2545-4f41-90f7-48badbb5bae5', '9878', 'CIRURGIA','PB');
 
 INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
-    VALUES (2, '330b358e-0945-4161-a8d5-a4514d73c78f', '000.000.000-00', 'vet2@example.com', 'Veterinário 2', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+    VALUES (2, '330b358e-0945-4161-a8d5-a4514d73c78f', '300.000.000-00', 'vet2@example.com', 'Veterinário 2', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
 
 INSERT INTO veterinarians (id, crmv, specialty, uf)
     VALUES ('330b358e-0945-4161-a8d5-a4514d73c78f', '9878', 'CIRURGIA','PB');

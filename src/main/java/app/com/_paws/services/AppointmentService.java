@@ -35,6 +35,10 @@ public class AppointmentService {
 
         List<Veterinarian> veterinarians = this.veterinarianRepository.findAllById(appointmentDTOForReceptionist.veterinarians());
 
+        if (veterinarians.size() != appointmentDTOForReceptionist.veterinarians().size()) {
+            throw new NotFoundException("Veterinário(s) não encontrado(s)!");
+        }
+
         Pet pet = this.petRepository.findById(appointmentDTOForReceptionist.pet())
                 .orElseThrow(() -> new NotFoundException("Pet não encontrado!"));
 
@@ -57,6 +61,7 @@ public class AppointmentService {
         return appointment;
     }
 
+    @Transactional
     public Appointment veterinarianUpdateAppointment(AppointmentDTOForVeterinarian appointmentDTOForVeterinarian, UUID veterinarianId) {
 
         Appointment appointment = this.findAppointmentByIdAndVeterinarianId(veterinarianId, appointmentDTOForVeterinarian.id());
@@ -64,23 +69,28 @@ public class AppointmentService {
 
         List<PrescriptionDTO> prescriptionDTOS = appointmentDTOForVeterinarian.prescriptions();
 
-        List<Prescription> prescriptions = prescriptionDTOS.stream().map((prescriptionDTO -> {
-            return new Prescription(prescriptionDTO, appointment);
-        })).toList();
+        if (prescriptionDTOS != null && !prescriptionDTOS.isEmpty()) {
+            List<Prescription> prescriptions = prescriptionDTOS.stream().map((prescriptionDTO -> {
+                return new Prescription(prescriptionDTO, appointment);
+            })).toList();
 
-        this.prescriptionRepository.saveAll(prescriptions);
+            this.prescriptionRepository.saveAll(prescriptions);
+        }
+
 
         List<ExamDTO> examsDTOS = appointmentDTOForVeterinarian.exams();
 
-        List<Exam> exams = examsDTOS.stream().map((examDTO) -> {
+        if (examsDTOS != null && !examsDTOS.isEmpty()) {
+            List<Exam> exams = examsDTOS.stream().map((examDTO) -> {
 
-            ExamType examType = this.examTypeRepository.findById(examDTO.examTypeId())
-                    .orElseThrow(() -> new NotFoundException("Tipo do Exame não encontrado!"));
+                ExamType examType = this.examTypeRepository.findById(examDTO.examTypeId())
+                        .orElseThrow(() -> new NotFoundException("Tipo do Exame não encontrado!"));
 
-            return new Exam(examType, appointment);
-        }).toList();
+                return new Exam(examType, appointment);
+            }).toList();
 
-        this.examRepository.saveAll(exams);
+            this.examRepository.saveAll(exams);
+        }
 
         return this.appointmentRepository.save(appointment);
     }

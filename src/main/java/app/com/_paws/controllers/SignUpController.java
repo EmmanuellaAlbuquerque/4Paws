@@ -7,6 +7,7 @@ import app.com._paws.domain.models.Veterinarian;
 import app.com._paws.services.UserProfileService;
 import app.com._paws.services.VeterinarianService;
 import app.com._paws.utils.RegistrationResponseUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,21 +21,21 @@ public class SignUpController {
     private final VeterinarianService veterinarianService;
 
     @PostMapping("/receptionist")
-    public ResponseEntity<Object> registerReceptionist(@RequestBody UserProfileDTO userProfileDTO) {
+    public ResponseEntity<Object> registerReceptionist(@Valid @RequestBody UserProfileDTO userProfileDTO) {
         UserProfile userProfile = userProfileService.registerUserProfile(userProfileDTO, "ROLE_RECEPCIONISTA");
 
         return RegistrationResponseUtil.build(userProfile);
     }
 
     @PostMapping("/admin")
-    public ResponseEntity<Object> registerAdmin(@RequestBody UserProfileDTO userProfileDTO) {
+    public ResponseEntity<Object> registerAdmin(@Valid @RequestBody UserProfileDTO userProfileDTO) {
         UserProfile userProfile = userProfileService.registerUserProfile(userProfileDTO, "ROLE_ADMIN");
 
         return RegistrationResponseUtil.build(userProfile);
     }
 
     @PostMapping("/veterinarian")
-    public ResponseEntity<Object> registerVeterinarian(@RequestBody VeterinarianDTO veterinarianDTO) {
+    public ResponseEntity<Object> registerVeterinarian(@Valid @RequestBody VeterinarianDTO veterinarianDTO) {
         Veterinarian veterinarian = veterinarianService.registerVeterinarian(veterinarianDTO);
 
         return  RegistrationResponseUtil.build(veterinarian);

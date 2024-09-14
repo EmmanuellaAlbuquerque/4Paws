@@ -7,6 +7,7 @@ import app.com._paws.domain.models.AppointmentType;
 import app.com._paws.domain.models.ExamType;
 import app.com._paws.services.ServiceTypeService;
 import app.com._paws.utils.RegistrationResponseUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class ServiceTypeController {
     private final ServiceTypeService serviceTypeService;
 
     @PostMapping("/service_types/appointments_types/new")
-    public ResponseEntity<Object> registerAppointmentType(@RequestBody ServiceTypeDTO appointmentTypeDTO) {
+    public ResponseEntity<Object> registerAppointmentType(@Valid @RequestBody ServiceTypeDTO appointmentTypeDTO) {
 
         AppointmentType appointmentType = serviceTypeService.registerAppointmentType(appointmentTypeDTO);
 
@@ -27,7 +28,7 @@ public class ServiceTypeController {
     }
 
     @PostMapping("/service_types/exams_types/new")
-    public ResponseEntity<Object> registerExamType(@RequestBody ServiceTypeDTO examTypeDTO) {
+    public ResponseEntity<Object> registerExamType(@Valid @RequestBody ServiceTypeDTO examTypeDTO) {
 
         ExamType examType = serviceTypeService.registerExamType(examTypeDTO);
 

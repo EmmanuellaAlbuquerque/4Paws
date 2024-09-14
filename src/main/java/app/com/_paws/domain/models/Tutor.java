@@ -1,5 +1,6 @@
 package app.com._paws.domain.models;
 
+import app.com._paws.domain.dtos.AddressDTO;
 import app.com._paws.domain.dtos.TutorDTO;
 import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
@@ -37,6 +38,7 @@ public class Tutor implements Identifiable<UUID> {
     public Tutor(TutorDTO tutorDTO) {
         this.name = tutorDTO.name();
         this.phone = tutorDTO.phone();
-        this.address = tutorDTO.address();
+        this.cpf = tutorDTO.cpf();
+        this.address = new Address(tutorDTO.address());
     }
 }
