@@ -11,7 +11,7 @@ public record TutorResponseDTO (
         String name,
         String phone,
         String cpf,
-        Address address,
+        AddressDTO address,
         List<PetResponseDTO> pets
 ) {
 
@@ -21,7 +21,11 @@ public record TutorResponseDTO (
                 tutor.getName(),
                 tutor.getPhone(),
                 tutor.getCpf(),
-                tutor.getAddress(),
+                new AddressDTO(
+                        tutor.getAddress().getNeighborhood(),
+                        tutor.getAddress().getNumber(),
+                        tutor.getAddress().getStreet()
+                ),
                 tutor.getPets().stream().map((pet) -> {
                     return new PetResponseDTO(
                             pet.getId(),
