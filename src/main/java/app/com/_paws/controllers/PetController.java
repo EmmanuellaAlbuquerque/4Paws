@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/pets")
+@RequestMapping(value = "/api/v1/pets", produces = {"application/json"})
 public class PetController {
 
     private final PetService petService;

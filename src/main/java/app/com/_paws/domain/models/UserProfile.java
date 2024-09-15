@@ -1,6 +1,6 @@
 package app.com._paws.domain.models;
 
-import app.com._paws.domain.UserProfileResponseDTO;
+import app.com._paws.domain.dtos.UserProfileResponseDTO;
 import app.com._paws.domain.dtos.IUserProfile;
 import app.com._paws.domain.dtos.UserProfileDTO;
 import app.com._paws.utils.Identifiable;

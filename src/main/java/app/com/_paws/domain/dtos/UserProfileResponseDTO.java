@@ -1,6 +1,4 @@
-package app.com._paws.domain;
-
-import app.com._paws.domain.dtos.IUserProfile;
+package app.com._paws.domain.dtos;
 
 public record UserProfileResponseDTO (
 

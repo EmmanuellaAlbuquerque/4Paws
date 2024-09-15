@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/profile")
+@RequestMapping(value = "/api/v1/profiles", produces = {"application/json"})
 @RequiredArgsConstructor
 public class UserProfileController {
 

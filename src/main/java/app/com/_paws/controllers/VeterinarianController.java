@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("veterinarian")
+@RequestMapping(value = "/api/v1/veterinarians", produces = {"application/json"})
 @RequiredArgsConstructor
 public class VeterinarianController {
 

@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/sign_up")
+@RequestMapping(value = "/api/v1/sign_up", produces = {"application/json"})
 public class SignUpController {
 
     private final UserProfileService userProfileService;
     private final VeterinarianService veterinarianService;
 
-    @PostMapping("/receptionist")
+    @PostMapping("/receptionists")
     public ResponseEntity<Object> registerReceptionist(@Valid @RequestBody UserProfileDTO userProfileDTO) {
         UserProfile userProfile = userProfileService.registerUserProfile(userProfileDTO, "ROLE_RECEPCIONISTA");
 
@@ -34,7 +34,7 @@ public class SignUpController {
         return RegistrationResponseUtil.build(userProfile);
     }
 
-    @PostMapping("/veterinarian")
+    @PostMapping("/veterinarians")
     public ResponseEntity<Object> registerVeterinarian(@Valid @RequestBody VeterinarianDTO veterinarianDTO) {
         Veterinarian veterinarian = veterinarianService.registerVeterinarian(veterinarianDTO);
 
