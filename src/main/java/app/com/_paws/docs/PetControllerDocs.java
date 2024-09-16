@@ -22,11 +22,11 @@ public interface PetControllerDocs {
                     
                     - O Peso do Pet (weight);\s
                     
-                    - O Sexo do Pet (sex);\s
+                    - O Sexo do Pet (sex) (OBS.: Veja o Schema para mais detalhes referentes aos ENUMS válidos);\s
                     
                     - A Raça do Pet (breed);\s
                     
-                    - A Espécie do Pet (specie).\s
+                    - A Espécie do Pet (specie) (OBS.: Veja o Schema para mais detalhes referentes aos ENUMS válidos);\s
                     
                     - A Data de Nascimento do Pet (birthDate);\s
                     

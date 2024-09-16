@@ -67,11 +67,11 @@ public interface SignUpControllerDocs {
                     
                     - O nome (name);\s
                     
-                    - A Especialidade (specialty);\s
+                    - A Especialidade (specialty) (OBS.: Veja o Schema para mais detalhes referentes aos ENUMS válidos);\s
                     
                     - O CRMV (crmv);\s
                     
-                    - E a UF (uf).\s
+                    - E a UF (uf) (OBS.: Veja o Schema para mais detalhes referentes aos ENUMS válidos).\s
                     """
     )
     @ApiResponses(value = {
