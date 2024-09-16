@@ -6,8 +6,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
+@Tag(name = "TutorController - Tutores", description = "Operações relacionadas ao gerenciamento de um Tutor")
 public interface TutorControllerDocs {
 
     @Operation(

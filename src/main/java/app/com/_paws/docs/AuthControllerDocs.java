@@ -1,17 +1,17 @@
 package app.com._paws.docs;
 
-import app.com._paws.domain.dtos.ErrorResponse;
 import app.com._paws.domain.dtos.LoginDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 
+@Tag(name = "AuthController - Login de Usuários", description = "Operações relacionadas a autenticação de um usuário")
 public interface AuthControllerDocs {
 
     @Operation(
