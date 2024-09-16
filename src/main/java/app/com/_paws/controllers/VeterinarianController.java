@@ -1,5 +1,6 @@
 package app.com._paws.controllers;
 
+import app.com._paws.docs.VeterinarianControllerDocs;
 import app.com._paws.domain.dtos.AppointmentDTOForVeterinarian;
 import app.com._paws.domain.dtos.AppointmentResponseDTO;
 import app.com._paws.domain.dtos.DetailedAppointmentResponseDTO;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/v1/veterinarians", produces = {"application/json"})
 @RequiredArgsConstructor
-public class VeterinarianController {
+public class VeterinarianController implements VeterinarianControllerDocs {
 
     private final VeterinarianService veterinarianService;
     private final AppointmentService appointmentService;

@@ -1,5 +1,6 @@
 package app.com._paws.controllers;
 
+import app.com._paws.docs.PetControllerDocs;
 import app.com._paws.domain.dtos.DetailedPetResponseDTO;
 import app.com._paws.domain.dtos.PetDTO;
 import app.com._paws.domain.models.Pet;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/pets", produces = {"application/json"})
-public class PetController {
+public class PetController implements PetControllerDocs {
 
     private final PetService petService;
 

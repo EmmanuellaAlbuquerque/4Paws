@@ -1,5 +1,6 @@
 package app.com._paws.controllers;
 
+import app.com._paws.docs.SignUpControllerDocs;
 import app.com._paws.domain.dtos.UserProfileDTO;
 import app.com._paws.domain.dtos.VeterinarianDTO;
 import app.com._paws.domain.models.UserProfile;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/sign_up", produces = {"application/json"})
-public class SignUpController {
+public class SignUpController implements SignUpControllerDocs {
 
     private final UserProfileService userProfileService;
     private final VeterinarianService veterinarianService;
@@ -27,7 +28,7 @@ public class SignUpController {
         return RegistrationResponseUtil.build(userProfile);
     }
 
-    @PostMapping("/admin")
+    @PostMapping("/admins")
     public ResponseEntity<Object> registerAdmin(@Valid @RequestBody UserProfileDTO userProfileDTO) {
         UserProfile userProfile = userProfileService.registerUserProfile(userProfileDTO, "ROLE_ADMIN");
 

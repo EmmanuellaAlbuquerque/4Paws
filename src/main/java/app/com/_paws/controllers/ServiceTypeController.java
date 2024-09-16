@@ -1,5 +1,6 @@
 package app.com._paws.controllers;
 
+import app.com._paws.docs.ServiceTypeControllerDocs;
 import app.com._paws.domain.dtos.DetailedServiceTypeResponseDTO;
 import app.com._paws.domain.dtos.ServiceTypeDTO;
 import app.com._paws.domain.dtos.ServiceTypeResponseDTO;
@@ -17,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1", produces = {"application/json"})
 @RequiredArgsConstructor
-public class ServiceTypeController {
+public class ServiceTypeController implements ServiceTypeControllerDocs {
     private final ServiceTypeService serviceTypeService;
 
     @PostMapping("/service_types/appointments_types/new")

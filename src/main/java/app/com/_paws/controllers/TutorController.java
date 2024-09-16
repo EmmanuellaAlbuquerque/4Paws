@@ -1,5 +1,6 @@
 package app.com._paws.controllers;
 
+import app.com._paws.docs.TutorControllerDocs;
 import app.com._paws.domain.dtos.TutorDTO;
 import app.com._paws.domain.dtos.TutorResponseDTO;
 import app.com._paws.domain.models.Tutor;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/tutors", produces = {"application/json"})
-public class TutorController {
+public class TutorController implements TutorControllerDocs {
 
     private final TutorService tutorService;
 

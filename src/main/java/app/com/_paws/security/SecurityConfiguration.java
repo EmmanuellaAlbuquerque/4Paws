@@ -37,6 +37,7 @@ public class SecurityConfiguration {
 
             authz.requestMatchers(antMatcher("/api/v1/sign_up/receptionists")).hasRole("ADMIN");
             authz.requestMatchers(antMatcher("/api/v1/sign_up/veterinarians")).hasRole("ADMIN");
+            authz.requestMatchers(antMatcher("/api/v1/sign_up/admins")).hasRole("ADMIN");
 
             authz.requestMatchers(antMatcher("/api/v1/tutors/**")).hasRole("RECEPCIONISTA");
 

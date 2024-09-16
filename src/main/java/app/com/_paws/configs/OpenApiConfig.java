@@ -20,7 +20,7 @@ public class OpenApiConfig {
         return new OpenAPI().info(
                 new Info()
                         .title("4Paws API")
-                        .description("Documentação da API do 4Paws - Plataforma de Gerenciamento de Clínicas Veterinárias")
+                        .description("### Documentação da API do 4Paws - Sistema de Gerenciamento para Clínicas Veterinárias.")
                         .version("v1.0.0")
                         .license(
                                 new License()
