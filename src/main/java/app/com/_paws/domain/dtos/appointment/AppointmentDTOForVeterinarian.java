@@ -8,9 +8,6 @@ import java.util.List;
 
 public record AppointmentDTOForVeterinarian (
 
-        @NotNull(message = "A Consulta vinculada é obrigatória")
-        Integer id,
-
         @NotBlank(message = "A Anotação sobre a Consulta é obrigatória")
         String notes,
 
