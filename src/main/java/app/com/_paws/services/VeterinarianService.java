@@ -1,6 +1,6 @@
 package app.com._paws.services;
 
-import app.com._paws.domain.dtos.VeterinarianDTO;
+import app.com._paws.domain.dtos.veterinarian.VeterinarianDTO;
 import app.com._paws.domain.models.Appointment;
 import app.com._paws.domain.models.Role;
 import app.com._paws.domain.models.Veterinarian;
@@ -53,5 +53,9 @@ public class VeterinarianService {
         List<Appointment> appointments = veterinarian.getAppointments();
 
         return appointments;
+    }
+
+    public List<Veterinarian> findAllVeterinarians() {
+        return this.veterinarianRepository.findAll();
     }
 }

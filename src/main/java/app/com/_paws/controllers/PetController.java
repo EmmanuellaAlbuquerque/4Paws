@@ -1,8 +1,8 @@
 package app.com._paws.controllers;
 
 import app.com._paws.docs.PetControllerDocs;
-import app.com._paws.domain.dtos.DetailedPetResponseDTO;
-import app.com._paws.domain.dtos.PetDTO;
+import app.com._paws.domain.dtos.pet.DetailedPetResponseDTO;
+import app.com._paws.domain.dtos.pet.PetDTO;
 import app.com._paws.domain.models.Pet;
 import app.com._paws.services.PetService;
 import app.com._paws.utils.RegistrationResponseUtil;

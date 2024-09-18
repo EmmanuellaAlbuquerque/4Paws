@@ -44,12 +44,16 @@ public class SecurityConfiguration {
             authz.requestMatchers(antMatcher(HttpMethod.GET, "/api/v1/pets/**")).hasAnyRole("VETERINARIO", "RECEPCIONISTA");;
             authz.requestMatchers(antMatcher("/api/v1/pets/**")).hasRole("RECEPCIONISTA");
 
-            authz.requestMatchers(antMatcher("/api/v1/service_types/appointments")).hasAnyRole("RECEPCIONISTA", "ADMIN");
-            authz.requestMatchers(antMatcher("/api/v1/service_types/exams")).hasAnyRole("VETERINARIO", "ADMIN");
+            authz.requestMatchers(antMatcher("/api/v1/service_types/appointments_types")).hasAnyRole("RECEPCIONISTA", "ADMIN");
+            authz.requestMatchers(antMatcher("/api/v1/service_types/exams_types")).hasAnyRole("VETERINARIO", "ADMIN");
             authz.requestMatchers(antMatcher("/api/v1/service_types/**")).hasRole("ADMIN");
 
+            authz.requestMatchers(antMatcher(HttpMethod.GET,"/api/v1/veterinarians")).hasAnyRole("ADMIN", "RECEPCIONISTA");
             authz.requestMatchers(antMatcher("/api/v1/veterinarians/**")).hasRole("VETERINARIO");
             authz.requestMatchers(antMatcher("/api/v1/appointments/**")).hasRole("RECEPCIONISTA");
+
+            authz.requestMatchers(antMatcher("/api/v1/prescriptions/**")).hasRole("VETERINARIO");
+            authz.requestMatchers(antMatcher("/api/v1/exams/**")).hasAnyRole("VETERINARIO", "RECEPCIONISTA");
         });
 
         httpSecurity.addFilterBefore(

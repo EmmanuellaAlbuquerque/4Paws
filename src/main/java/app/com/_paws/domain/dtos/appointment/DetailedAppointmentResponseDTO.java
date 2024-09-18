@@ -1,9 +1,9 @@
-package app.com._paws.domain.dtos;
+package app.com._paws.domain.dtos.appointment;
 
+import app.com._paws.domain.dtos.PrescriptionDTO;
+import app.com._paws.domain.dtos.pet.DetailedPetResponseDTO;
+import app.com._paws.domain.dtos.exam.ExamResponseDTO;
 import app.com._paws.domain.models.Appointment;
-import app.com._paws.domain.models.Exam;
-import app.com._paws.domain.models.Pet;
-import app.com._paws.domain.models.Prescription;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +16,7 @@ public record DetailedAppointmentResponseDTO(
         String notes,
         String appointmentType,
         List<ExamResponseDTO> exams,
-        List<Prescription> prescriptions
+        List<PrescriptionDTO> prescriptions
 ) {
 
     public static DetailedAppointmentResponseDTO getDetailedAppointmentDTOFromAppointment(Appointment appointment) {
@@ -35,10 +35,18 @@ public record DetailedAppointmentResponseDTO(
                                     exam.getId(),
                                     exam.getResult(),
                                     exam.getScheduledDate(),
-                                    exam.getExamType().getName()
+                                    exam.getExamType().getName(),
+                                    exam.getExamType().getId()
                             );
                         }).toList(),
-                appointment.getPrescriptions()
+                appointment.getPrescriptions().stream()
+                        .map(prescription -> {
+                            return new PrescriptionDTO(
+                                    prescription.getId(),
+                                    prescription.getMedicine(),
+                                    prescription.getDosageDescription()
+                            );
+                        }).toList()
         );
     }
 }

@@ -1,12 +1,11 @@
-package app.com._paws.domain.dtos;
+package app.com._paws.domain.dtos.tutor;
 
-import app.com._paws.domain.models.Address;
+import app.com._paws.domain.dtos.AddressDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.format.annotation.NumberFormat;
 
 public record TutorDTO (
 

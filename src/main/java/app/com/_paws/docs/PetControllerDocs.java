@@ -1,7 +1,7 @@
 package app.com._paws.docs;
 
-import app.com._paws.domain.dtos.DetailedPetResponseDTO;
-import app.com._paws.domain.dtos.PetDTO;
+import app.com._paws.domain.dtos.pet.DetailedPetResponseDTO;
+import app.com._paws.domain.dtos.pet.PetDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,13 +15,13 @@ import java.util.UUID;
 public interface PetControllerDocs {
 
     @Operation(
-            summary = "Registre um Pet",
+            summary = "Registra um Pet",
             description = """
                     Um(a) **Recepcionista** consegue cadastrar um **Pet**, especificando:\s
                     
                     - O Nome do Pet (name);\s
                     
-                    - O Peso do Pet (weight);\s
+                    - O Peso do Pet em KG (weight);\s
                     
                     - O Sexo do Pet (sex) (OBS.: Veja o Schema para mais detalhes referentes aos ENUMS válidos);\s
                     

@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 public interface UserProfileControllerDocs {
 
     @Operation(
-            summary = "Obtenha dados do Perfil do Usuário"
+            summary = "Retorna dados do Perfil do Usuário logado"
     )
     @ApiResponses(value = {
             @ApiResponse(

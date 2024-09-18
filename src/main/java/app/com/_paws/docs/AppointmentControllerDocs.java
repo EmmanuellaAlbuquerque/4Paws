@@ -1,7 +1,8 @@
 package app.com._paws.docs;
 
-import app.com._paws.domain.dtos.AppointmentDTOForReceptionist;
+import app.com._paws.domain.dtos.appointment.AppointmentDTOForReceptionist;
 import app.com._paws.domain.dtos.ErrorResponse;
+import app.com._paws.domain.dtos.appointment.AppointmentResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -9,13 +10,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 @Tag(name = "AppointmentController - Consultas", description = "Operações relacionadas a cadastro de Consultas por um Recepcionista")
 public interface AppointmentControllerDocs {
 
     @Operation(
-            summary = "Registre uma nova Consulta",
+            summary = "Registra uma nova Consulta",
             description = """
                     Um(a) **Recepcionista** consegue cadastrar uma nova **Consulta**, especificando:\s
                     
@@ -133,4 +139,34 @@ public interface AppointmentControllerDocs {
             ),
     })
     ResponseEntity<Object> receptionistRegisterAppointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist);
+
+    @Operation(
+            summary = "Lista todas as Consultas"
+    )
+    ResponseEntity<List<AppointmentResponseDTO>> obtainAllAppointments();
+
+    @Operation(
+            summary = "Deleta uma Consulta"
+    )
+    ResponseEntity<Void> deleteAppointment(Integer appointmentId);
+
+    @Operation(
+            summary = "Atualiza uma Consulta",
+            description = """
+                    Um(a) **Recepcionista** consegue atualizar uma **Consulta**, especificando:\s
+                    
+                    - O Id da Consulta (appointmentId)l;\s
+                    
+                    - O Id do Tipo de Consulta (appointmentType);\s
+                    
+                    - A Data da Consulta (scheduledDate);\s
+                    
+                    - Os Ids dos Veterinários alocados na Consulta (veterinarians);\s
+                    
+                    - E o Id do Pet que será o paciente da Consulta (pet).\s
+                    """
+    )
+
+    ResponseEntity<Void> updateAppointment(Integer appointmentId,
+                                           AppointmentDTOForReceptionist appointmentDTOForReceptionist);
 }

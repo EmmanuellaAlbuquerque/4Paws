@@ -1,7 +1,7 @@
 package app.com._paws.docs;
 
-import app.com._paws.domain.dtos.TutorDTO;
-import app.com._paws.domain.dtos.TutorResponseDTO;
+import app.com._paws.domain.dtos.tutor.TutorDTO;
+import app.com._paws.domain.dtos.tutor.TutorResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 public interface TutorControllerDocs {
 
     @Operation(
-            summary = "Registre um Tutor",
+            summary = "Registra um Tutor",
             description = """
                     Um(a) **Recepcionista** consegue cadastrar um **Tutor**, especificando:\s
                     

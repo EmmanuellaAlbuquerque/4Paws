@@ -1,7 +1,7 @@
 package app.com._paws.services;
 
-import app.com._paws.domain.dtos.DetailedPetResponseDTO;
-import app.com._paws.domain.dtos.PetDTO;
+import app.com._paws.domain.dtos.pet.DetailedPetResponseDTO;
+import app.com._paws.domain.dtos.pet.PetDTO;
 import app.com._paws.domain.models.Pet;
 import app.com._paws.domain.models.Tutor;
 import app.com._paws.domain.repositories.PetRepository;

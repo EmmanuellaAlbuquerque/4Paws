@@ -6,80 +6,89 @@ INSERT INTO roles (id, name) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO roles (id, name) VALUES (2, 'ROLE_VETERINARIO');
 INSERT INTO roles (id, name) VALUES (3, 'ROLE_RECEPCIONISTA');
 
--- Adiciona admin padrão (senha: 123)
+-- Adiciona Admin Padrão
 INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
-    VALUES (1, '72252574-f9f2-4569-a3c3-80675bd5fb36', '000.000.000-00', 'manu@gmail.com', 'Emmanuella Albuquerque', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+    VALUES (1, random_uuid(), '702.481.800-02', 'admin@example.com', 'Admin', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+
+-- Adiciona Recepcionista
+INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
+    VALUES (3, random_uuid(), '789.146.490-16', 'maria-recep@example.com', 'Rosa Maria Allana', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+
+-- Adiciona Veterinários
+
+-- VET 1
 
 INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
-    VALUES (3, 'b1b2f126-ab19-4503-b210-f00caede98c0', '100.000.000-00', 'email@example.com', 'Recepcionista 1', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+    VALUES (2, random_uuid(), '963.429.730-75', 'benjamin-vet@example.com', 'Benjamin Vicente Fernandes', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+
+INSERT INTO veterinarians (id, crmv, uf)
+    VALUES ((SELECT id FROM user_profiles WHERE email = 'benjamin-vet@example.com'), 9012, 'MG');
+
+-- VET 2
 
 INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
-    VALUES (2, 'f87bb204-2545-4f41-90f7-48badbb5bae5', '200.000.000-00', 'vet@example.com', 'Veterinário 1', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+    VALUES (2, random_uuid(), '200.447.390-87', 'tonia-vet@example.com', 'Antônia Yasmin Marcela Araújo', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
 
 INSERT INTO veterinarians (id, crmv, specialty, uf)
-    VALUES ('f87bb204-2545-4f41-90f7-48badbb5bae5', '9878', 'CIRURGIA','PB');
+    VALUES ((SELECT id FROM user_profiles WHERE email = 'tonia-vet@example.com'), 3456, 'MEDICINA_INTENSIVA_VETERINARIA','RS');
+
+-- VET 3
+
+-- Tipos de Consulta
+
+INSERT INTO exam_types (base_price, name, description) VALUES
+(80.00, 'Hemograma completo', 'Análise detalhada das células sanguíneas para avaliar saúde geral e detectar infecções, anemias e outras condições.'),
+(50.00, 'Urinálise', 'Exame da urina para detectar infecções urinárias, problemas renais e metabólicos.'),
+(150.00, 'Radiografia', 'Imagem de raio-X para visualizar ossos, órgãos internos e detectar fraturas, tumores ou objetos estranhos.'),
+(40.00, 'Exame parasitológico de fezes', 'Análise das fezes para detectar parasitas internos.'),
+(60.00, 'Exame físico geral', 'Avaliação completa do estado de saúde do animal, incluindo verificação de peso, temperatura, frequência cardíaca e respiratória.');
+
+INSERT INTO appointment_types (base_price, name, description) VALUES
+(100.00, 'Consulta de rotina', 'Check-up geral para avaliar a saúde do animal, incluindo exame físico completo e atualização de vacinas.'),
+(120.00, 'Consulta pré-cirúrgica', 'Avaliação completa antes de procedimentos cirúrgicos, incluindo exames pré-operatórios.'),
+(200.00, 'Consulta de emergência', 'Atendimento imediato para casos urgentes como acidentes, intoxicações ou doenças súbitas.'),
+(130.00, 'Consulta odontológica', 'Avaliação da saúde bucal, incluindo exame dos dentes e gengivas.'),
+(150.00, 'Consulta dermatológica', 'Avaliação especializada para problemas de pele, alergias e condições do pelo.'),
+(90.00, 'Consulta de acompanhamento', 'Revisão após tratamento ou cirurgia para avaliar a recuperação e ajustar o plano de tratamento se necessário.');
 
 INSERT INTO user_profiles (role_id, id, cpf, email, name, password)
-    VALUES (2, '330b358e-0945-4161-a8d5-a4514d73c78f', '300.000.000-00', 'vet2@example.com', 'Veterinário 2', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
+    VALUES (2, random_uuid(), '984.712.220-27', 'vi-vet@example.com', 'Vitória Luna Isabela', '$2a$10$zFUNeDm2em5A49wh6Ro5Jeswj2wsPBN5ZzdGJ5n6ny.XxvDiPXK1K');
 
 INSERT INTO veterinarians (id, crmv, specialty, uf)
-    VALUES ('330b358e-0945-4161-a8d5-a4514d73c78f', '9878', 'CIRURGIA','PB');
+    VALUES ((SELECT id FROM user_profiles WHERE email = 'vi-vet@example.com'), 7890, 'DERMATOLOGIA','PR');
 
--- Inserindo dados para testes manuais
+-- Adiciona Endereço
 
--- Insert data into ADDRESSES table
-INSERT INTO ADDRESSES (ID, NUMBER, NEIGHBORHOOD, STREET) VALUES
-(1, '123', 'Centro', 'Rua Principal'),
-(2, '456', 'Bairro Novo', 'Avenida Secundária'),
-(3, '789', 'Jardim', 'Rua das Flores');
+INSERT INTO addresses (number, neighborhood, street) VALUES
+(190, 'Centro', 'Rua Boa Vista');
 
--- Insert data into TUTORS table
-INSERT INTO TUTORS (ADDRESS_ID, ID, NAME, PHONE, CPF) VALUES
-(1, '02ed9f8b-e529-4eb5-81c1-9ae78588d283', 'João Silva', '(83) 99999-1111', '111.111.111-11'),
-(2, '12971a56-5bcf-4527-8f92-9a12d2b76cb4', 'Maria Oliveira', '(83) 99999-2222', '333.333.333-33'),
-(3, 'a049b975-bb29-478f-8e37-abc7629e9e7c', 'Carlos Santos', '(83) 99999-3333', '222.222.222-22');
+-- Adiciona Tutor
 
--- Insert data into PETS table
-INSERT INTO PETS (BIRTH_DATE, WEIGHT, ID, TUTOR_ID, BREED, NAME, SEX, SPECIE) VALUES
-('2020-01-15', 5.5, 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', '12971a56-5bcf-4527-8f92-9a12d2b76cb4', 'Labrador', 'Rex', 'MACHO', 'CANINA'),
-('2019-05-20', 4.0, '54c015f4-8309-4af6-9ba5-2f9598310bfe', '12971a56-5bcf-4527-8f92-9a12d2b76cb4', 'Siamese', 'Luna', 'FEMEA', 'FELINA');
+INSERT INTO tutors (id, address_id, name, phone, cpf) VALUES
+(random_uuid(), 1, 'Manu Albuquerque', '(83) 97087-0821', '388.203.260-00');
 
--- Insert data into APPOINTMENT_TYPES table
-INSERT INTO APPOINTMENT_TYPES (BASE_PRICE, ID, DESCRIPTION, NAME) VALUES
-(100.00, 1, 'Consulta de rotina', 'Consulta Padrão'),
-(150.00, 2, 'Vacinação', 'Vacinação'),
-(200.00, 3, 'Cirurgia simples', 'Cirurgia Menor');
+-- Adiciona Pets
 
--- Insert data into APPOINTMENTS table
-INSERT INTO APPOINTMENTS (APPOINTMENT_TYPE_ID, ID, SCHEDULED_DATE, PET_ID, NOTES) VALUES
-(3, 1, '2024-09-29 09:00:00', '54c015f4-8309-4af6-9ba5-2f9598310bfe', 'Remoção de tumor benigno'),
-(1, 3, '2024-09-30 16:00:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Checkup anual'),
-(1, 4, '2024-09-22 11:00:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Checkup mensal'),
-(2, 2, '2024-09-11 14:30:00', 'd9e1a7b5-ad18-41fd-b84e-0665eff4fa91', 'Vacinação contra raiva');
+INSERT INTO pets (id, birth_date, weight, tutor_id, breed, name, sex, specie) VALUES
+(random_uuid(), '2020-09-17', 4, (SELECT id FROM tutors WHERE cpf = '388.203.260-00'), 'Siamês', 'Dama de Preto', 'FEMEA', 'CANINA'),
+(random_uuid(), '2019-09-17', 27, (SELECT id FROM tutors WHERE cpf = '388.203.260-00'), 'SRD', 'Duquesa', 'FEMEA', 'FELINA');
 
--- Insert data into APPOINTMENT_VETERINARIAN table
-INSERT INTO APPOINTMENT_VETERINARIAN (APPOINTMENT_ID, VETERINARIAN_ID) VALUES
-(1, 'f87bb204-2545-4f41-90f7-48badbb5bae5'),
-(1, '330b358e-0945-4161-a8d5-a4514d73c78f'),
-(2, 'f87bb204-2545-4f41-90f7-48badbb5bae5'),
-(3, 'f87bb204-2545-4f41-90f7-48badbb5bae5'),
-(4, 'f87bb204-2545-4f41-90f7-48badbb5bae5');
+-- Adiciona Consulta
+INSERT INTO appointments (appointment_type_id, scheduled_date, pet_id, notes) VALUES
+(1, '2025-10-10 09:00:00', (SELECT id FROM pets WHERE name = 'Dama de Preto'), 'O paciente foi examinado durante a consulta de rotina e não apresenta sinais de infecção ou outras anormalidades aparentes. Para obter informações mais detalhadas sobre o estado de saúde, foi solicitado o exame físico geral e o hemograma completo.'),
+(5, '2025-10-10 10:00:00', (SELECT id FROM pets WHERE name = 'Duquesa'), null);
 
--- Insert data into EXAM_TYPES table
-INSERT INTO EXAM_TYPES (BASE_PRICE, ID, DESCRIPTION, NAME) VALUES
-(80.00, 1, 'Exame de sangue completo', 'Hemograma'),
-(120.00, 2, 'Raio-X', 'Radiografia'),
-(100.00, 3, 'Teste de urina', 'Urinálise');
+-- Adiciona Veterinários a Consulta
+INSERT INTO appointment_veterinarian (appointment_id, veterinarian_id) VALUES
+(1, (SELECT id FROM user_profiles WHERE email = 'tonia-vet@example.com')),
+(2, (SELECT id FROM user_profiles WHERE email = 'tonia-vet@example.com'));
 
--- Insert data into EXAMS table
-INSERT INTO EXAMS (APPOINTMENT_ID, EXAM_TYPE_ID, SCHEDULED_DATE, ID, RESULT) VALUES
-(1, 1, '2024-09-10 11:00:00', random_uuid(), 'Resultados normais'),
-(2, 2, '2024-09-11 15:30:00', random_uuid(), 'Sem alterações significativas'),
-(3, 3, '2024-09-12 10:00:00', random_uuid(), 'Pendente');
+-- Adiciona Exames
+INSERT INTO exams (id, appointment_id, exam_type_id, scheduled_date, result) VALUES
+(random_uuid(), 1, 5, '2025-10-10 09:10:00', 'O paciente apresenta bom estado geral. Boa hidratação. Temperatura corporal dentro da normalidade: 38,5°C. Frequência cardíaca dentro do esperado: 90 bpm. Dentes limpos, sem acúmulo excessivo de tártaro. Pelagem brilhante e sem áreas de alopecia.'),
+(random_uuid(), 1, 1, '2025-10-15 09:10:00', null);
 
--- Insert data into PRESCRIPTIONS table
-INSERT INTO PRESCRIPTIONS (APPOINTMENT_ID, ID, DOSAGE_DESCRIPTION, MEDICINE) VALUES
-(1, random_uuid(), '1 comprimido por dia durante 7 dias', 'Vitamina C'),
-(2, random_uuid(), '1 aplicação única', 'Vacina Antirrábica'),
-(3, random_uuid(), '1 comprimido a cada 12 horas por 5 dias', 'Antibiótico');
-
+-- Adiciona Prescrições
+INSERT INTO prescriptions (id, appointment_id, medicine, dosage_description) VALUES
+(random_uuid(), 1, 'Suplemento vitamínico', 'Administrar 1 comprimido por dia durante 30 dias'),
+(random_uuid(), 1, 'Antiparasitário', 'Aplicar uma dose única, repetir em 3 meses');

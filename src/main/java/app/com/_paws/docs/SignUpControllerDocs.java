@@ -1,7 +1,7 @@
 package app.com._paws.docs;
 
 import app.com._paws.domain.dtos.UserProfileDTO;
-import app.com._paws.domain.dtos.VeterinarianDTO;
+import app.com._paws.domain.dtos.veterinarian.VeterinarianDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 public interface SignUpControllerDocs {
 
     @Operation(
-            summary = "Registre um Recepcionista",
+            summary = "Registra um Recepcionista",
             description = """
                     Um(a) **Admin** consegue cadastrar um **Recepcionista**, especificando:\s
                     
@@ -36,7 +36,7 @@ public interface SignUpControllerDocs {
     ResponseEntity<Object> registerReceptionist(UserProfileDTO userProfileDTO);
 
     @Operation(
-            summary = "Registre um Admin",
+            summary = "Registra um Admin",
             description = """
                     Um(a) **Admin** consegue cadastrar um **Admin**, especificando:\s
                     
@@ -59,7 +59,7 @@ public interface SignUpControllerDocs {
     ResponseEntity<Object> registerAdmin(UserProfileDTO userProfileDTO);
 
     @Operation(
-            summary = "Registre um Veterinário",
+            summary = "Registra um Veterinário",
             description = """
                     Um(a) **Admin** consegue cadastrar um **Veterinário**, especificando:\s
                     

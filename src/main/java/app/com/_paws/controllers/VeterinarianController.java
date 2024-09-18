@@ -1,9 +1,10 @@
 package app.com._paws.controllers;
 
 import app.com._paws.docs.VeterinarianControllerDocs;
-import app.com._paws.domain.dtos.AppointmentDTOForVeterinarian;
-import app.com._paws.domain.dtos.AppointmentResponseDTO;
-import app.com._paws.domain.dtos.DetailedAppointmentResponseDTO;
+import app.com._paws.domain.dtos.appointment.AppointmentDTOForVeterinarian;
+import app.com._paws.domain.dtos.appointment.AppointmentResponseDTO;
+import app.com._paws.domain.dtos.appointment.DetailedAppointmentResponseDTO;
+import app.com._paws.domain.dtos.veterinarian.VeterinarianResponseDTO;
 import app.com._paws.domain.models.Appointment;
 import app.com._paws.services.AppointmentService;
 import app.com._paws.services.AuthService;
@@ -25,6 +26,13 @@ public class VeterinarianController implements VeterinarianControllerDocs {
     private final VeterinarianService veterinarianService;
     private final AppointmentService appointmentService;
     private final AuthService authService;
+
+    @GetMapping
+    public ResponseEntity<List<VeterinarianResponseDTO>> obtainAllVeterinarians() {
+        List<VeterinarianResponseDTO> veterinarianResponseDTOS = VeterinarianResponseDTO.fromVet(this.veterinarianService.findAllVeterinarians());
+
+        return ResponseEntity.ok(veterinarianResponseDTOS);
+    }
 
     @GetMapping("/appointments")
     public ResponseEntity<List<AppointmentResponseDTO>> obtainAllVetAppointments() {
@@ -48,10 +56,10 @@ public class VeterinarianController implements VeterinarianControllerDocs {
     }
 
     @PutMapping("/appointments/{appointmentId}")
-    public ResponseEntity<Object> veterinarianUpdateAppointment(@Valid @RequestBody AppointmentDTOForVeterinarian appointmentDTOForVeterinarian) {
+    public ResponseEntity<Object> veterinarianUpdateAppointment(@PathVariable(value = "appointmentId") Integer appointmentId, @Valid @RequestBody AppointmentDTOForVeterinarian appointmentDTOForVeterinarian) {
 
         UUID vetUUID = this.authService.obtainAuthenticatedUserUUID();
-        Appointment appointment = this.appointmentService.veterinarianUpdateAppointment(appointmentDTOForVeterinarian, vetUUID);
+        Appointment appointment = this.appointmentService.veterinarianUpdateAppointment(appointmentDTOForVeterinarian, appointmentId, vetUUID);
 
         return RegistrationResponseUtil.build(appointment);
     }

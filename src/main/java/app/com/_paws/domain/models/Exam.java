@@ -1,6 +1,6 @@
 package app.com._paws.domain.models;
 
-import app.com._paws.domain.dtos.ExamDTO;
+import app.com._paws.domain.dtos.exam.ExamDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -34,8 +34,12 @@ public class Exam {
     @JoinColumn(name = "appointment_id", nullable = false)
     Appointment appointment;
 
-    public Exam(ExamType examType, Appointment appointment) {
+    public Exam(ExamDTO examDTO, ExamType examType, Appointment appointment) {
         this.examType = examType;
         this.appointment = appointment;
+
+        this.id = examDTO.id();
+        this.result = examDTO.result();
+        this.scheduledDate = examDTO.scheduledDate();
     }
 }

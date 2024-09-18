@@ -1,8 +1,9 @@
 package app.com._paws.docs;
 
-import app.com._paws.domain.dtos.AppointmentDTOForVeterinarian;
-import app.com._paws.domain.dtos.AppointmentResponseDTO;
-import app.com._paws.domain.dtos.DetailedAppointmentResponseDTO;
+import app.com._paws.domain.dtos.appointment.AppointmentDTOForVeterinarian;
+import app.com._paws.domain.dtos.appointment.AppointmentResponseDTO;
+import app.com._paws.domain.dtos.appointment.DetailedAppointmentResponseDTO;
+import app.com._paws.domain.dtos.veterinarian.VeterinarianResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -14,6 +15,17 @@ import java.util.List;
 
 @Tag(name = "VeterinarianController - Veterinários", description = "Operações relacionadas ao gerenciamento de Consultas de um Veterinário")
 public interface VeterinarianControllerDocs {
+
+    @Operation(
+            summary = "Lista todos os Veterinários"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Um(a) **Recepcionista** e um **Admin** conseguem obter todos os **Veterinários** cadastrados."
+            )
+    })
+    ResponseEntity<List<VeterinarianResponseDTO>> obtainAllVeterinarians();
 
     @Operation(
             summary = "Lista todas as Consultas de um Veterinário"
@@ -38,11 +50,11 @@ public interface VeterinarianControllerDocs {
     ResponseEntity<DetailedAppointmentResponseDTO> obtainOneVetAppointment(Integer appointmentId);
 
     @Operation(
-            summary = "Atualize uma Consulta",
+            summary = "Atualiza uma Consulta",
             description = """
                     Um(a) **Veterinário** consegue atualizar dados da **Consulta** a qual pertence, especificando:\s
                     
-                    - O Id da Consulta que quer atualizar (id);\s
+                    - O Id da Consulta que quer atualizar (appointmentId);\s
                     
                     - As Anotações da Consulta (notes);\s
                     
@@ -58,5 +70,5 @@ public interface VeterinarianControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> veterinarianUpdateAppointment(AppointmentDTOForVeterinarian appointmentDTOForVeterinarian);
+    ResponseEntity<Object> veterinarianUpdateAppointment(Integer appointmentId, AppointmentDTOForVeterinarian appointmentDTOForVeterinarian);
 }

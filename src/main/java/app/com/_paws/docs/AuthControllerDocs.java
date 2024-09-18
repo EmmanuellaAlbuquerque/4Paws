@@ -15,7 +15,7 @@ import java.util.Map;
 public interface AuthControllerDocs {
 
     @Operation(
-            summary = "Faz Login de um Usuário",
+            summary = "Autentica o usuário",
             description = """
                     Para fazer login o **Usuário** deve especificar:\s
                     

@@ -1,4 +1,4 @@
-package app.com._paws.domain.dtos;
+package app.com._paws.domain.dtos.servicetype;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

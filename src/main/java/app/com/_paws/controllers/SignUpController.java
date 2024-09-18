@@ -2,7 +2,7 @@ package app.com._paws.controllers;
 
 import app.com._paws.docs.SignUpControllerDocs;
 import app.com._paws.domain.dtos.UserProfileDTO;
-import app.com._paws.domain.dtos.VeterinarianDTO;
+import app.com._paws.domain.dtos.veterinarian.VeterinarianDTO;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.domain.models.Veterinarian;
 import app.com._paws.services.UserProfileService;

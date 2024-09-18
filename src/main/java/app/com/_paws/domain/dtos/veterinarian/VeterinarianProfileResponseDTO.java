@@ -1,5 +1,6 @@
-package app.com._paws.domain.dtos;
+package app.com._paws.domain.dtos.veterinarian;
 
+import app.com._paws.domain.dtos.IUserProfile;
 import app.com._paws.domain.enums.Specialty;
 import app.com._paws.domain.enums.UF;
 

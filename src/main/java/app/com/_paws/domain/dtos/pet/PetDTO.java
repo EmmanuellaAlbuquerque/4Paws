@@ -1,4 +1,4 @@
-package app.com._paws.domain.dtos;
+package app.com._paws.domain.dtos.pet;
 
 import app.com._paws.domain.enums.Sex;
 import app.com._paws.domain.enums.Specie;

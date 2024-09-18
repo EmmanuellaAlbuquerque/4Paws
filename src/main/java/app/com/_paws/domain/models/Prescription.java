@@ -30,6 +30,7 @@ public class Prescription {
     Appointment appointment;
 
     public Prescription(PrescriptionDTO prescriptionDTO, Appointment appointment) {
+        this.id = prescriptionDTO.id();
         this.medicine = prescriptionDTO.medicine();
         this.dosageDescription = prescriptionDTO.dosageDescription();
         this.appointment = appointment;

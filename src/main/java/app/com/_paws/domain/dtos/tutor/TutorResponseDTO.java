@@ -1,6 +1,7 @@
-package app.com._paws.domain.dtos;
+package app.com._paws.domain.dtos.tutor;
 
-import app.com._paws.domain.models.Address;
+import app.com._paws.domain.dtos.AddressDTO;
+import app.com._paws.domain.dtos.pet.PetResponseDTO;
 import app.com._paws.domain.models.Tutor;
 
 import java.util.List;

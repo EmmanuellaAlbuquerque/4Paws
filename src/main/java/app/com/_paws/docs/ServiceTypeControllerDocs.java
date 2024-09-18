@@ -1,8 +1,8 @@
 package app.com._paws.docs;
 
 import app.com._paws.domain.dtos.DetailedServiceTypeResponseDTO;
-import app.com._paws.domain.dtos.ServiceTypeDTO;
-import app.com._paws.domain.dtos.ServiceTypeResponseDTO;
+import app.com._paws.domain.dtos.servicetype.ServiceTypeDTO;
+import app.com._paws.domain.dtos.servicetype.ServiceTypeResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,7 +16,7 @@ import java.util.List;
 public interface ServiceTypeControllerDocs {
 
     @Operation(
-            summary = "Registre um Tipo de Consulta",
+            summary = "Registra um Tipo de Consulta",
             description = """
                     Um(a) **Admin** consegue cadastrar um **Tipo de Consulta**, especificando:\s
                     
@@ -37,7 +37,7 @@ public interface ServiceTypeControllerDocs {
     ResponseEntity<Object> registerAppointmentType(ServiceTypeDTO appointmentTypeDTO);
 
     @Operation(
-            summary = "Registre um Tipo de Exame",
+            summary = "Registra um Tipo de Exame",
             description = """
                     Um(a) **Admin** consegue cadastrar um **Tipo de Exame**, especificando:\s
                     

@@ -1,8 +1,9 @@
-package app.com._paws.domain.dtos;
+package app.com._paws.domain.dtos.appointment;
 
+import app.com._paws.domain.dtos.exam.ExamDTO;
+import app.com._paws.domain.dtos.PrescriptionDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 

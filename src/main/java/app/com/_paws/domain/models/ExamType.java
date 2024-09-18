@@ -1,6 +1,6 @@
 package app.com._paws.domain.models;
 
-import app.com._paws.domain.dtos.ServiceTypeDTO;
+import app.com._paws.domain.dtos.servicetype.ServiceTypeDTO;
 import app.com._paws.utils.Identifiable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -15,7 +15,7 @@ import java.util.List;
 public class ExamType implements ServiceType, Identifiable<Integer> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @Column(nullable = false, unique = true)

@@ -1,8 +1,8 @@
 package app.com._paws.domain.models;
 
 import app.com._paws.domain.dtos.IUserProfile;
-import app.com._paws.domain.dtos.VeterinarianDTO;
-import app.com._paws.domain.dtos.VeterinarianProfileResponseDTO;
+import app.com._paws.domain.dtos.veterinarian.VeterinarianDTO;
+import app.com._paws.domain.dtos.veterinarian.VeterinarianProfileResponseDTO;
 import app.com._paws.domain.enums.Specialty;
 import app.com._paws.domain.enums.UF;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,7 +30,7 @@ public class Veterinarian extends UserProfile {
     private Specialty specialty;
 
     @Column(nullable = false)
-    private long crmv;
+    private Long crmv;
 
     @Enumerated(EnumType.STRING)
     private UF uf;

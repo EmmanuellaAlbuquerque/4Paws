@@ -1,14 +1,15 @@
 package app.com._paws.services;
 
-import app.com._paws.domain.dtos.AppointmentDTOForReceptionist;
-import app.com._paws.domain.dtos.AppointmentDTOForVeterinarian;
-import app.com._paws.domain.dtos.ExamDTO;
+import app.com._paws.domain.dtos.appointment.AppointmentDTOForReceptionist;
+import app.com._paws.domain.dtos.appointment.AppointmentDTOForVeterinarian;
+import app.com._paws.domain.dtos.exam.ExamDTO;
 import app.com._paws.domain.dtos.PrescriptionDTO;
 import app.com._paws.domain.models.*;
 import app.com._paws.domain.repositories.*;
 import app.com._paws.exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,19 +28,36 @@ public class AppointmentService {
     private final ExamRepository examRepository;
     private final PrescriptionRepository prescriptionRepository;
 
+    public Appointment findAppointmentById(Integer id) {
+        return this.appointmentRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Consulta não encontrada!"));
+    }
+
+    public List<Appointment> findAllAppointments() {
+        return this.appointmentRepository.findAll(Sort.by("scheduledDate"));
+    }
+
+    public void deleteAppointmentById(Integer id) {
+        this.appointmentRepository.deleteById(id);
+    }
+
+    public void updateAppointmentById(Integer appointmentId, AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
+        appointmentDTOForReceptionist.setId(appointmentId);
+        this.receptionistRegisterAppointment(appointmentDTOForReceptionist);
+    }
+
     @Transactional
     public Appointment receptionistRegisterAppointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
-
-        AppointmentType appointmentType = this.appointmentTypeRepository.findById(appointmentDTOForReceptionist.appointmentType())
+        AppointmentType appointmentType = this.appointmentTypeRepository.findById(appointmentDTOForReceptionist.getAppointmentType())
                 .orElseThrow(() -> new NotFoundException("Tipo de Consulta não encontrada!"));
 
-        List<Veterinarian> veterinarians = this.veterinarianRepository.findAllById(appointmentDTOForReceptionist.veterinarians());
+        List<Veterinarian> veterinarians = this.veterinarianRepository.findAllById(appointmentDTOForReceptionist.getVeterinarians());
 
-        if (veterinarians.size() != appointmentDTOForReceptionist.veterinarians().size()) {
+        if (veterinarians.size() != appointmentDTOForReceptionist.getVeterinarians().size()) {
             throw new NotFoundException("Veterinário(s) não encontrado(s)!");
         }
 
-        Pet pet = this.petRepository.findById(appointmentDTOForReceptionist.pet())
+        Pet pet = this.petRepository.findById(appointmentDTOForReceptionist.getPet())
                 .orElseThrow(() -> new NotFoundException("Pet não encontrado!"));
 
         Appointment appointment = new Appointment(appointmentDTOForReceptionist, appointmentType, veterinarians, pet);
@@ -62,9 +80,9 @@ public class AppointmentService {
     }
 
     @Transactional
-    public Appointment veterinarianUpdateAppointment(AppointmentDTOForVeterinarian appointmentDTOForVeterinarian, UUID veterinarianId) {
+    public Appointment veterinarianUpdateAppointment(AppointmentDTOForVeterinarian appointmentDTOForVeterinarian, Integer appointmentId, UUID veterinarianId) {
 
-        Appointment appointment = this.findAppointmentByIdAndVeterinarianId(veterinarianId, appointmentDTOForVeterinarian.id());
+        Appointment appointment = this.findAppointmentByIdAndVeterinarianId(veterinarianId, appointmentId);
         appointment.setNotes(appointmentDTOForVeterinarian.notes());
 
         List<PrescriptionDTO> prescriptionDTOS = appointmentDTOForVeterinarian.prescriptions();
@@ -86,7 +104,7 @@ public class AppointmentService {
                 ExamType examType = this.examTypeRepository.findById(examDTO.examTypeId())
                         .orElseThrow(() -> new NotFoundException("Tipo do Exame não encontrado!"));
 
-                return new Exam(examType, appointment);
+                return new Exam(examDTO, examType, appointment);
             }).toList();
 
             this.examRepository.saveAll(exams);

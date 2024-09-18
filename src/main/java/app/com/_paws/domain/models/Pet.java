@@ -1,6 +1,6 @@
 package app.com._paws.domain.models;
 
-import app.com._paws.domain.dtos.PetDTO;
+import app.com._paws.domain.dtos.pet.PetDTO;
 import app.com._paws.domain.enums.Sex;
 import app.com._paws.domain.enums.Specie;
 import app.com._paws.utils.Identifiable;

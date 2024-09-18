@@ -2,8 +2,8 @@ package app.com._paws.controllers;
 
 import app.com._paws.docs.ServiceTypeControllerDocs;
 import app.com._paws.domain.dtos.DetailedServiceTypeResponseDTO;
-import app.com._paws.domain.dtos.ServiceTypeDTO;
-import app.com._paws.domain.dtos.ServiceTypeResponseDTO;
+import app.com._paws.domain.dtos.servicetype.ServiceTypeDTO;
+import app.com._paws.domain.dtos.servicetype.ServiceTypeResponseDTO;
 import app.com._paws.domain.models.AppointmentType;
 import app.com._paws.domain.models.ExamType;
 import app.com._paws.services.ServiceTypeService;

@@ -1,6 +1,6 @@
 package app.com._paws.domain.models;
 
-import app.com._paws.domain.dtos.AppointmentDTOForReceptionist;
+import app.com._paws.domain.dtos.appointment.AppointmentDTOForReceptionist;
 import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.util.List;
 public class Appointment implements Identifiable<Integer> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "scheduled_date", nullable = false)
@@ -46,8 +46,10 @@ public class Appointment implements Identifiable<Integer> {
     private AppointmentType appointmentType;
 
     public Appointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist, AppointmentType appointmentType, List<Veterinarian> veterinarians, Pet pet) {
+
+        this.id = appointmentDTOForReceptionist.getId();
         this.appointmentType = appointmentType;
-        this.scheduledDate = appointmentDTOForReceptionist.scheduledDate();
+        this.scheduledDate = appointmentDTOForReceptionist.getScheduledDate();
         this.veterinarians = veterinarians;
         this.pet = pet;
     }
