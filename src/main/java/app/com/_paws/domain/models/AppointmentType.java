@@ -31,9 +31,10 @@ public class AppointmentType implements ServiceType, Identifiable<Integer> {
     @OneToMany(mappedBy = "appointmentType", fetch = FetchType.LAZY)
     List<Appointment> appointments;
 
-    public AppointmentType(ServiceTypeDTO examTypeDTO) {
-        this.name = examTypeDTO.name();
-        this.description = examTypeDTO.description();
-        this.basePrice = examTypeDTO.basePrice();
+    public AppointmentType(ServiceTypeDTO appointmentTypeDTO) {
+        this.id = appointmentTypeDTO.getId();
+        this.name = appointmentTypeDTO.getName();
+        this.description = appointmentTypeDTO.getDescription();
+        this.basePrice = appointmentTypeDTO.getBasePrice();
     }
 }

@@ -60,4 +60,12 @@ public class ServiceTypeController implements ServiceTypeControllerDocs {
 
         return ResponseEntity.ok(this.serviceTypeService.findOneExamType(examTypeId));
     }
+
+    @PutMapping("/service_types/appointments_types/{appointmentTypeId}")
+    public ResponseEntity<Void> updateAppointmentType(@PathVariable(value = "appointmentTypeId") Integer appointmentTypeId,
+                                                      @Valid @RequestBody ServiceTypeDTO appointmentTypeDTO) {
+
+        this.serviceTypeService.updateAppointmentType(appointmentTypeId, appointmentTypeDTO);
+        return ResponseEntity.ok().build();
+    }
 }

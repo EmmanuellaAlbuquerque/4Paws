@@ -23,7 +23,7 @@ public class ServiceTypeService {
     private final AppointmentTypeRepository appointmentTypeRepository;
 
     public ExamType registerExamType(ServiceTypeDTO examTypeDTO) {
-        this.examTypeRepository.findByName(examTypeDTO.name())
+        this.examTypeRepository.findByName(examTypeDTO.getName())
                 .ifPresent((examType) -> {
                     throw new BusinessException("'" + examType.getName() + "'" + " - Tipo de Exame já cadastrado!");
                 });
@@ -34,7 +34,7 @@ public class ServiceTypeService {
     }
 
     public AppointmentType registerAppointmentType(ServiceTypeDTO appointmentTypeDTO) {
-        this.appointmentTypeRepository.findByName(appointmentTypeDTO.name())
+        this.appointmentTypeRepository.findByName(appointmentTypeDTO.getName())
                 .ifPresent((appointmentType) -> {
                     throw new BusinessException("'" + appointmentType.getName() + "'" + " - Tipo de Consulta já cadastrada!");
                 });
@@ -94,5 +94,11 @@ public class ServiceTypeService {
                 .orElseThrow(() -> new NotFoundException("Tipo de Exame não encontrado!"));
 
         return getOneServiceTypeAsDetailedDTO(examType);
+    }
+
+    public void updateAppointmentType(Integer appointmentTypeId, ServiceTypeDTO appointmentTypeDTO) {
+
+        appointmentTypeDTO.setId(appointmentTypeId);
+        this.registerAppointmentType(appointmentTypeDTO);
     }
 }

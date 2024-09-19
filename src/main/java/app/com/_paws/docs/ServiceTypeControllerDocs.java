@@ -8,7 +8,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -56,6 +59,22 @@ public interface ServiceTypeControllerDocs {
             )
     })
     ResponseEntity<Object> registerExamType(ServiceTypeDTO examTypeDTO);
+
+    @Operation(
+            summary = "Atualiza um Tipo de Consulta",
+            description = """
+                    Um(a) **Admin** consegue atualizar um **Tipo de Consulta**, especificando:\s
+                    
+                    - O Id do Tipo de Consulta (appointmentTypeId);\s
+                    
+                    - O Nome do Tipo de Consulta (name);\s
+                    
+                    - A Descrição do Tipo de Consulta (description);\s
+                    
+                    - E o Preço Base da Consulta (basePrice).\s
+                    """
+    )
+    ResponseEntity<Void> updateAppointmentType(Integer appointmentTypeId, ServiceTypeDTO appointmentTypeDTO);
 
     @Operation(
             summary = "Lista todos os Tipos de Consulta"

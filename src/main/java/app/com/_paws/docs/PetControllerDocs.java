@@ -62,7 +62,7 @@ public interface PetControllerDocs {
             description = """
                     Um(a) **Recepcionista** consegue atualizar dados de um **Pet**, especificando:\s
                     
-                    - O Id do pet (petId);
+                    - O Id do pet (petId);\s
                     
                     - O Nome do Pet (name);\s
                     

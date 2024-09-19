@@ -32,8 +32,8 @@ public class ExamType implements ServiceType, Identifiable<Integer> {
     List<Exam> exams;
 
     public ExamType(ServiceTypeDTO examTypeDTO) {
-        this.name = examTypeDTO.name();
-        this.description = examTypeDTO.description();
-        this.basePrice = examTypeDTO.basePrice();
+        this.name = examTypeDTO.getName();
+        this.description = examTypeDTO.getDescription();
+        this.basePrice = examTypeDTO.getBasePrice();
     }
 }
