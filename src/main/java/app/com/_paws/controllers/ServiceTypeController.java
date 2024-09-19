@@ -68,4 +68,12 @@ public class ServiceTypeController implements ServiceTypeControllerDocs {
         this.serviceTypeService.updateAppointmentType(appointmentTypeId, appointmentTypeDTO);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/service_types/exams_types/{examTypeId}")
+    public ResponseEntity<Void> updateExamType(@PathVariable(value = "examTypeId") Integer examTypeId,
+                                               @Valid @RequestBody ServiceTypeDTO examTypeDTO) {
+
+        this.serviceTypeService.updateExamType(examTypeId, examTypeDTO);
+        return ResponseEntity.ok().build();
+    }
 }

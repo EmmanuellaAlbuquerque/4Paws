@@ -77,6 +77,22 @@ public interface ServiceTypeControllerDocs {
     ResponseEntity<Void> updateAppointmentType(Integer appointmentTypeId, ServiceTypeDTO appointmentTypeDTO);
 
     @Operation(
+            summary = "Atualiza um Tipo de Exame",
+            description = """
+                    Um(a) **Admin** consegue atualizar um **Tipo de Exame**, especificando:\s
+                    
+                    - O id do Tipo de Exame (examTypeId);\s
+                    
+                    - O Nome do Tipo de Exame (name);\s
+                    
+                    - A Descrição do Tipo de Exame (description);\s
+                    
+                    - E o Preço Base do Exame (basePrice).\s
+                    """
+    )
+    ResponseEntity<Void> updateExamType(Integer examTypeId, ServiceTypeDTO examTypeDTO);
+
+    @Operation(
             summary = "Lista todos os Tipos de Consulta"
     )
     @ApiResponses(value = {

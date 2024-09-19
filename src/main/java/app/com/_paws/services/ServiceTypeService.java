@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +24,12 @@ public class ServiceTypeService {
     private final AppointmentTypeRepository appointmentTypeRepository;
 
     public ExamType registerExamType(ServiceTypeDTO examTypeDTO) {
+
         this.examTypeRepository.findByName(examTypeDTO.getName())
                 .ifPresent((examType) -> {
-                    throw new BusinessException("'" + examType.getName() + "'" + " - Tipo de Exame já cadastrado!");
+                    if (!Objects.equals(examType.getId(), examTypeDTO.getId())) {
+                        throw new BusinessException("'" + examType.getName() + "'" + " - Tipo de Exame já cadastrado!");
+                    }
                 });
 
         ExamType examType = new ExamType(examTypeDTO);
@@ -36,7 +40,9 @@ public class ServiceTypeService {
     public AppointmentType registerAppointmentType(ServiceTypeDTO appointmentTypeDTO) {
         this.appointmentTypeRepository.findByName(appointmentTypeDTO.getName())
                 .ifPresent((appointmentType) -> {
-                    throw new BusinessException("'" + appointmentType.getName() + "'" + " - Tipo de Consulta já cadastrada!");
+                    if (!Objects.equals(appointmentType.getId(), appointmentTypeDTO.getId())) {
+                        throw new BusinessException("'" + appointmentType.getName() + "'" + " - Tipo de Consulta já cadastrada!");
+                    }
                 });
 
         AppointmentType appointmentType = new AppointmentType(appointmentTypeDTO);
@@ -100,5 +106,10 @@ public class ServiceTypeService {
 
         appointmentTypeDTO.setId(appointmentTypeId);
         this.registerAppointmentType(appointmentTypeDTO);
+    }
+
+    public void updateExamType(Integer examTypeId, ServiceTypeDTO examTypeDTO) {
+        examTypeDTO.setId(examTypeId);
+        this.registerExamType(examTypeDTO);
     }
 }
