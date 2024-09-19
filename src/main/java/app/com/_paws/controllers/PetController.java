@@ -28,6 +28,13 @@ public class PetController implements PetControllerDocs {
         return RegistrationResponseUtil.build(pet);
     }
 
+    @PutMapping("/{petId}")
+    public ResponseEntity<Void> updatePet(@PathVariable(value = "petId") UUID petId, @Valid @RequestBody PetDTO petDTO) {
+
+        this.petService.updatePet(petId, petDTO);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/{petId}")
     public ResponseEntity<DetailedPetResponseDTO> obtainOnePet(@PathVariable(value = "petId") UUID petId) {
 

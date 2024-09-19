@@ -21,7 +21,7 @@ public class PetService {
 
     public Pet registerPet(PetDTO petDTO){
 
-        Tutor tutor = tutorRepository.findById(petDTO.tutorId())
+        Tutor tutor = tutorRepository.findById(petDTO.getTutorId())
                 .orElseThrow(() -> new NotFoundException("Tutor não encontrado!"));
 
         Pet pet = new Pet(petDTO, tutor);
@@ -35,5 +35,11 @@ public class PetService {
                 .orElseThrow(() -> new NotFoundException("Pet não encontrado!"));
 
         return DetailedPetResponseDTO.fromPet(pet);
+    }
+
+    public void updatePet(UUID id, PetDTO petDTO) {
+
+        petDTO.setId(id);
+        this.registerPet(petDTO);
     }
 }

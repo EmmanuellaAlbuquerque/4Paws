@@ -48,12 +48,13 @@ public class Pet implements Identifiable<UUID> {
     private List<Appointment> appointments;
 
     public Pet(PetDTO petDTO, Tutor tutor) {
-        this.name = petDTO.name();
-        this.weight = petDTO.weight();
-        this.sex = petDTO.sex();
-        this.breed = petDTO.breed();
-        this.specie = petDTO.specie();
-        this.birthDate = petDTO.birthDate();
+        this.id = petDTO.getId();
+        this.name = petDTO.getName();
+        this.weight = petDTO.getWeight();
+        this.sex = petDTO.getSex();
+        this.breed = petDTO.getBreed();
+        this.specie = petDTO.getSpecie();
+        this.birthDate = petDTO.getBirthDate();
         this.tutor = tutor;
     }
 }
