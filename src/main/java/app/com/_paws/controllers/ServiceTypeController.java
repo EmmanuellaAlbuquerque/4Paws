@@ -21,7 +21,7 @@ import java.util.List;
 public class ServiceTypeController implements ServiceTypeControllerDocs {
     private final ServiceTypeService serviceTypeService;
 
-    @PostMapping("/service_types/appointments_types/new")
+    @PostMapping("/service-types/appointments-types/new")
     public ResponseEntity<Object> registerAppointmentType(@Valid @RequestBody ServiceTypeDTO appointmentTypeDTO) {
 
         AppointmentType appointmentType = serviceTypeService.registerAppointmentType(appointmentTypeDTO);
@@ -29,7 +29,7 @@ public class ServiceTypeController implements ServiceTypeControllerDocs {
         return RegistrationResponseUtil.build(appointmentType);
     }
 
-    @PostMapping("/service_types/exams_types/new")
+    @PostMapping("/service-types/exams-types/new")
     public ResponseEntity<Object> registerExamType(@Valid @RequestBody ServiceTypeDTO examTypeDTO) {
 
         ExamType examType = serviceTypeService.registerExamType(examTypeDTO);
@@ -37,31 +37,31 @@ public class ServiceTypeController implements ServiceTypeControllerDocs {
         return RegistrationResponseUtil.build(examType);
     }
 
-    @GetMapping("/service_types/appointments_types")
+    @GetMapping("/service-types/appointments-types")
     public ResponseEntity<List<ServiceTypeResponseDTO>> obtainAllAppointmentTypes() {
 
         return ResponseEntity.ok(this.serviceTypeService.findAllAppointmentTypes());
     }
 
-    @GetMapping("/service_types/exams_types")
+    @GetMapping("/service-types/exams-types")
     public ResponseEntity<List<ServiceTypeResponseDTO>> obtainAllExamsTypes() {
 
         return ResponseEntity.ok(this.serviceTypeService.findAllExamsTypes());
     }
 
-    @GetMapping("/service_types/appointments_types/{appointmentTypeId}")
+    @GetMapping("/service-types/appointments-types/{appointmentTypeId}")
     public ResponseEntity<DetailedServiceTypeResponseDTO> obtainOneAppointmentType(@PathVariable(value = "appointmentTypeId") Integer appointmentTypeId) {
 
         return ResponseEntity.ok(this.serviceTypeService.findOneAppointmentType(appointmentTypeId));
     }
 
-    @GetMapping("/service_types/exams_types/{examTypeId}")
+    @GetMapping("/service-types/exams-types/{examTypeId}")
     public ResponseEntity<DetailedServiceTypeResponseDTO> obtainOneExamType(@PathVariable(value = "examTypeId") Integer examTypeId) {
 
         return ResponseEntity.ok(this.serviceTypeService.findOneExamType(examTypeId));
     }
 
-    @PutMapping("/service_types/appointments_types/{appointmentTypeId}")
+    @PutMapping("/service-types/appointments-types/{appointmentTypeId}")
     public ResponseEntity<Void> updateAppointmentType(@PathVariable(value = "appointmentTypeId") Integer appointmentTypeId,
                                                       @Valid @RequestBody ServiceTypeDTO appointmentTypeDTO) {
 
@@ -69,7 +69,7 @@ public class ServiceTypeController implements ServiceTypeControllerDocs {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/service_types/exams_types/{examTypeId}")
+    @PutMapping("/service-types/exams-types/{examTypeId}")
     public ResponseEntity<Void> updateExamType(@PathVariable(value = "examTypeId") Integer examTypeId,
                                                @Valid @RequestBody ServiceTypeDTO examTypeDTO) {
 
