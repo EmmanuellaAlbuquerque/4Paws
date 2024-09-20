@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/v1/sign_up", produces = {"application/json"})
+@RequestMapping(value = "/api/v1/sign-up", produces = {"application/json"})
 public class SignUpController implements SignUpControllerDocs {
 
     private final UserProfileService userProfileService;
