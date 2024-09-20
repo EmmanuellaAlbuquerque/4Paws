@@ -9,6 +9,11 @@ import app.com._paws.domain.repositories.TutorRepository;
 import app.com._paws.exceptions.BusinessException;
 import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,7 +60,13 @@ public class TutorService {
         this.tutorRepository.save(tutor);
     }
 
-    public List<Tutor> findAllTutors() {
-        return this.tutorRepository.findAll();
+    public Page<Tutor> findAllTutors(int pageIndex) {
+        return this.tutorRepository.findAll(
+                PageRequest.of(
+                        pageIndex,
+                        10,
+                        Sort.by(Sort.Direction.ASC, "name")
+                )
+        );
     }
 }

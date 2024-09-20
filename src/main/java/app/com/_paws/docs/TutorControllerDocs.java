@@ -1,20 +1,21 @@
 package app.com._paws.docs;
 
 import app.com._paws.domain.dtos.tutor.TutorDTO;
-import app.com._paws.domain.dtos.tutor.TutorListDTO;
 import app.com._paws.domain.dtos.tutor.TutorResponseDTO;
 import app.com._paws.domain.dtos.tutor.TutorUpdateDTO;
+import app.com._paws.domain.dtos.tutor.TutorsDTO;
+import app.com._paws.domain.models.Tutor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
 import java.util.UUID;
 
 @Tag(name = "TutorController - Tutores", description = "Operações relacionadas ao gerenciamento de um Tutor")
@@ -60,7 +61,7 @@ public interface TutorControllerDocs {
     @Operation(
             summary = "Lista todos os Tutores"
     )
-    ResponseEntity<List<TutorListDTO>> obtainAllTutors();
+    ResponseEntity<PagedModel<TutorsDTO>> obtainAllTutors(int pageIndex, PagedResourcesAssembler assembler);
 
     @Operation(
             summary = "Retorna detalhes de um Tutor específico"
