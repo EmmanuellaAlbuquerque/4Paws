@@ -11,6 +11,7 @@ import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -52,5 +53,9 @@ public class TutorService {
         tutor.setAddress(address);
 
         this.tutorRepository.save(tutor);
+    }
+
+    public List<Tutor> findAllTutors() {
+        return this.tutorRepository.findAll();
     }
 }

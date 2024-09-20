@@ -1,6 +1,7 @@
 package app.com._paws.docs;
 
 import app.com._paws.domain.dtos.tutor.TutorDTO;
+import app.com._paws.domain.dtos.tutor.TutorListDTO;
 import app.com._paws.domain.dtos.tutor.TutorResponseDTO;
 import app.com._paws.domain.dtos.tutor.TutorUpdateDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.UUID;
 
 @Tag(name = "TutorController - Tutores", description = "Operações relacionadas ao gerenciamento de um Tutor")
@@ -54,6 +56,11 @@ public interface TutorControllerDocs {
                     """
     )
     ResponseEntity<Void> updateTutor(UUID tutorId, TutorUpdateDTO tutorUpdateDTO);
+
+    @Operation(
+            summary = "Lista todos os Tutores"
+    )
+    ResponseEntity<List<TutorListDTO>> obtainAllTutors();
 
     @Operation(
             summary = "Retorna detalhes de um Tutor específico"

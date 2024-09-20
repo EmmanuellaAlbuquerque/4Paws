@@ -2,6 +2,7 @@ package app.com._paws.controllers;
 
 import app.com._paws.docs.TutorControllerDocs;
 import app.com._paws.domain.dtos.tutor.TutorDTO;
+import app.com._paws.domain.dtos.tutor.TutorListDTO;
 import app.com._paws.domain.dtos.tutor.TutorResponseDTO;
 import app.com._paws.domain.dtos.tutor.TutorUpdateDTO;
 import app.com._paws.domain.models.Tutor;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -38,6 +40,13 @@ public class TutorController implements TutorControllerDocs {
     }
 
     @GetMapping
+    public ResponseEntity<List<TutorListDTO>> obtainAllTutors() {
+
+        List<TutorListDTO> tutorsDTOS = TutorListDTO.fromTutors(this.tutorService.findAllTutors());
+        return ResponseEntity.ok(tutorsDTOS);
+    }
+
+    @GetMapping("/by-cpf")
     public ResponseEntity<TutorResponseDTO> obtainTutorByCpf(@RequestParam("tutorCpf") String tutorCpf) {
 
         TutorResponseDTO tutorResponseDTO = tutorService.findTutorByCpf(tutorCpf);
