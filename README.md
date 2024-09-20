@@ -26,6 +26,32 @@ O 4Paws é uma API projetada para otimizar e simplificar a gestão de clínicas 
    - Atualização de informações dos tutores
    - Busca de tutores por CPF 🔍
 
+### Dados de Acesso (para testes)
+
+###### admin
+```json
+{
+   "email": "admin@example.com",
+   "password": "123"
+}
+```
+
+###### recepcionista
+```json
+{
+   "email": "maria-recep@example.com",
+   "password": "123"
+}
+```
+
+###### veterinário
+```json
+{
+   "email": "tonia-vet@example.com",
+   "password": "123"
+}
+```
+
 ## Diagramas UML
 ### Diagrama de Sequência
 
