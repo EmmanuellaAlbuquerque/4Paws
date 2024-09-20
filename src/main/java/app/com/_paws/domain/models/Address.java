@@ -34,4 +34,11 @@ public class Address {
         this.number = addressDTO.number();
         this.street = addressDTO.street();
     }
+
+    public Address(Integer addressId, AddressDTO addressDTO) {
+        this.id = addressId;
+        this.neighborhood = addressDTO.neighborhood();
+        this.number = addressDTO.number();
+        this.street = addressDTO.street();
+    }
 }

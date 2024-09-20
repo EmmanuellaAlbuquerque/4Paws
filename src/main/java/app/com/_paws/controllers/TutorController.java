@@ -3,6 +3,7 @@ package app.com._paws.controllers;
 import app.com._paws.docs.TutorControllerDocs;
 import app.com._paws.domain.dtos.tutor.TutorDTO;
 import app.com._paws.domain.dtos.tutor.TutorResponseDTO;
+import app.com._paws.domain.dtos.tutor.TutorUpdateDTO;
 import app.com._paws.domain.models.Tutor;
 import app.com._paws.services.TutorService;
 import app.com._paws.utils.RegistrationResponseUtil;
@@ -10,6 +11,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +27,14 @@ public class TutorController implements TutorControllerDocs {
         Tutor tutor = tutorService.registerTutor(tutorDTO);
 
         return RegistrationResponseUtil.build(tutor);
+    }
+
+    @PutMapping("/{tutorId}")
+    public ResponseEntity<Void> updateTutor(@PathVariable(value = "tutorId") UUID tutorId,
+                                            @Valid @RequestBody TutorUpdateDTO tutorUpdateDTO) {
+
+        this.tutorService.updateTutor(tutorId, tutorUpdateDTO);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping

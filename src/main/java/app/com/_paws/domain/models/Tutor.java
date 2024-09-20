@@ -1,6 +1,7 @@
 package app.com._paws.domain.models;
 
 import app.com._paws.domain.dtos.tutor.TutorDTO;
+import app.com._paws.domain.dtos.tutor.TutorUpdateDTO;
 import app.com._paws.utils.Identifiable;
 import jakarta.persistence.*;
 import lombok.Data;
