@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public interface VeterinarianControllerDocs {
                     description = "Um(a) **Recepcionista** e um **Admin** conseguem obter todos os **Veterinários** cadastrados."
             )
     })
-    ResponseEntity<List<VeterinarianResponseDTO>> obtainAllVeterinarians();
+    ResponseEntity<PagedModel<VeterinarianResponseDTO>> obtainAllVeterinarians(int pageIndex, PagedResourcesAssembler assembler);
 
     @Operation(
             summary = "Lista todas as Consultas de um Veterinário"

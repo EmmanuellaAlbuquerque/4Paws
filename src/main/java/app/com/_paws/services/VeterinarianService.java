@@ -10,6 +10,9 @@ import app.com._paws.domain.repositories.VeterinarianRepository;
 import app.com._paws.exceptions.BusinessException;
 import app.com._paws.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +58,13 @@ public class VeterinarianService {
         return appointments;
     }
 
-    public List<Veterinarian> findAllVeterinarians() {
-        return this.veterinarianRepository.findAll();
+    public Page<Veterinarian> findAllVeterinarians(int pageIndex) {
+        return this.veterinarianRepository.findAll(
+                PageRequest.of(
+                        pageIndex,
+                        10,
+                        Sort.by(Sort.Direction.ASC, "name")
+                )
+        );
     }
 }

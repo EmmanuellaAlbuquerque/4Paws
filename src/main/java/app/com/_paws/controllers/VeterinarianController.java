@@ -10,8 +10,12 @@ import app.com._paws.services.AppointmentService;
 import app.com._paws.services.AuthService;
 import app.com._paws.services.VeterinarianService;
 import app.com._paws.utils.RegistrationResponseUtil;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,10 +32,12 @@ public class VeterinarianController implements VeterinarianControllerDocs {
     private final AuthService authService;
 
     @GetMapping
-    public ResponseEntity<List<VeterinarianResponseDTO>> obtainAllVeterinarians() {
-        List<VeterinarianResponseDTO> veterinarianResponseDTOS = VeterinarianResponseDTO.fromVet(this.veterinarianService.findAllVeterinarians());
+    public ResponseEntity<PagedModel<VeterinarianResponseDTO>> obtainAllVeterinarians(@RequestParam("page") int pageIndex,
+                                                                                      @Parameter(hidden = true)PagedResourcesAssembler assembler) {
 
-        return ResponseEntity.ok(veterinarianResponseDTOS);
+        Page<VeterinarianResponseDTO> veterinarianResponseDTOS = VeterinarianResponseDTO.fromVet(this.veterinarianService.findAllVeterinarians(pageIndex));
+
+        return ResponseEntity.ok(assembler.toModel(veterinarianResponseDTOS));
     }
 
     @GetMapping("/appointments")
