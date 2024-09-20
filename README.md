@@ -10,15 +10,11 @@ O 4Paws é uma API projetada para otimizar e simplificar a gestão de clínicas 
 
 📌 [Diagramas UML](#diagramas-uml)
 
-   📍[Diagrama de Sequência](#diagrama-de-sequência)
-   📍[Diagrama de Caso de Uso](#diagrama-de-caso-de-uso)
-   📍[Diagrama de Classes](#diagrama-de-classes)
+📌 [Tecnologias Utilizadas](#tecnologias-utilizadas)
 
-  📌 [Tecnologias Utilizadas](#tecnologias-utilizadas)
+📌 [Licença](#licença)
 
-  📌 [Licença](#licença)
-
-  📌 [Autor](#autor)
+📌 [Autor](#autor)
 
 ## Funcionalidades
 
