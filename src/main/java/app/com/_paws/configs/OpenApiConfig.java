@@ -19,8 +19,14 @@ public class OpenApiConfig {
 
         return new OpenAPI().info(
                 new Info()
-                        .title("4Paws API")
-                        .description("### Documentação da API do 4Paws - Sistema de Gerenciamento para Clínicas Veterinárias.")
+                        .title("4Paws API \uD83D\uDC3E\uD83D\uDC15\u200D\uD83E\uDDBA")
+                        .description(
+                                """
+                                <h3>Documentação da API do 4Paws - Sistema de Gerenciamento para Clínicas Veterinárias</h3>
+                                <p>O 4Paws é uma API projetada para otimizar e simplificar a gestão de clínicas veterinárias. Ela oferece um conjunto de ferramentas para gerenciar consultas,</p>
+                                <p>exames, prescrições, registros dos veterinários da clínica, registros de animais de estimação e informações dos tutores.</p>
+                                """
+                        )
                         .version("v1.0.0")
                         .license(
                                 new License()
