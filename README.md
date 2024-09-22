@@ -237,6 +237,8 @@ classDiagram
 
 ### Licença
 
+[Apache License 2.0](https://github.com/EmmanuellaAlbuquerque/4Paws/blob/main/LICENSE)
+
 ### Autor
 
 <a href="https://www.linkedin.com/in/emmanuella-albuquerque/">
