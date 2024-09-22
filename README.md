@@ -232,6 +232,7 @@ classDiagram
   - Spring Security
   - Spring Validation
 - JWT
+- H2 Database
 - Lombok
 
 ### Licença

@@ -70,8 +70,8 @@ INSERT INTO tutors (id, address_id, name, phone, cpf) VALUES
 -- Adiciona Pets
 
 INSERT INTO pets (id, birth_date, weight, tutor_id, breed, name, sex, specie) VALUES
-(random_uuid(), '2020-09-17', 4, (SELECT id FROM tutors WHERE cpf = '388.203.260-00'), 'Siamês', 'Dama de Preto', 'FEMEA', 'CANINA'),
-(random_uuid(), '2019-09-17', 27, (SELECT id FROM tutors WHERE cpf = '388.203.260-00'), 'SRD', 'Duquesa', 'FEMEA', 'FELINA');
+(random_uuid(), '2020-09-17', 4.5, (SELECT id FROM tutors WHERE cpf = '388.203.260-00'), 'siamês', 'Dama de Preto', 'FEMEA', 'FELINA'),
+(random_uuid(), '2019-09-17', 27.2, (SELECT id FROM tutors WHERE cpf = '388.203.260-00'), 'SRD', 'Duquesa', 'FEMEA', 'CANINA');
 
 -- Adiciona Consulta
 INSERT INTO appointments (appointment_type_id, scheduled_date, pet_id, notes) VALUES

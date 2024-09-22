@@ -12,9 +12,9 @@ public record DetailedPetResponseDTO (
         UUID id,
         String name,
         Double weight,
-        Sex sex,
+        String sex,
         String breed,
-        Specie specie,
+        String specie,
         Integer age,
         UUID tutorId
 ) {
@@ -24,9 +24,9 @@ public record DetailedPetResponseDTO (
                 pet.getId(),
                 pet.getName(),
                 pet.getWeight(),
-                pet.getSex(),
+                pet.getSex().getName(),
                 pet.getBreed(),
-                pet.getSpecie(),
+                pet.getSpecie().getName(),
                 Period.between(pet.getBirthDate(), LocalDate.now()).getYears(),
                 pet.getTutor().getId()
         );

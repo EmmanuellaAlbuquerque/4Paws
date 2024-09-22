@@ -5,7 +5,7 @@ import app.com._paws.domain.models.Appointment;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record AppointmentResponseDTO(
+    public record AppointmentResponseDTO(
         Integer id,
         LocalDateTime scheduledDate,
         List<String> veterinarians,

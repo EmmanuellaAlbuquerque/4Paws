@@ -7,6 +7,6 @@ public record ExamResponseDTO (
         UUID id,
         String result,
         LocalDateTime scheduledDate,
-        String examType,
+        String name,
         Integer examTypeId
 ) {}
