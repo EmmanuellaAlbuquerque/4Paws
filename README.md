@@ -273,6 +273,9 @@ classDiagram
     %% Pagamento "1" --> "1" Servico : tem
 ```
 
+### Diagrama de Banco de Dados
+![4PawsDbDiagram](./docs//images/4PawsDB.svg)
+
 ## Tecnologias Utilizadas
 
 - Java
