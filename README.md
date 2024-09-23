@@ -98,24 +98,28 @@ sequenceDiagram
 ```mermaid
 classDiagram
     class Usuario {
-        +UUID id
-        +String email
-        +String senha
-        +String nome
-        +String cpf
-        +Cargo cargo
+        -UUID id
+        -String email
+        -String senha
+        -String nome
+        -String cpf
+        -Cargo cargo
     }
 
     class Tutor {
-        +String telefone
-        +Endereco endereco
-        +List~Pet~ pets
+        -UUID id
+        -String nome
+        -String telefone
+        -String cpf
+        -Endereco endereco
+        -List~Pet~ pets
     }
 
     class Veterinario {
-        +Especialidade especialidade
-        +long crmv
-        +UF UF
+        -Especialidade especialidade
+        -long crmv
+        -UF UF
+        -List~Consulta~ consultas
     }
 
     class UF {
@@ -140,89 +144,137 @@ classDiagram
 
     }
 
-    class Admin {
-
+    class Pet {
+        -UUID id
+        -String nome
+        -double peso
+        -Sexo sexo
+        -Raca raça
+        -LocalDateTime dataDeNascimento
+        -Tutor tutor
     }
 
-    class Pet {
-        +UUID id
-        +String nome
-        +double peso
-        +Sexo sexo
-        +String raça
-        +Especie especie
-        +LocalDate dataDeNascimento
-        +Tutor tutor
+    class Raca {
+        -Integer id
+        -String nome
+        -Especie especie
     }
 
     class Especie {
-        <<enumeration>>
-        CANINA
-        FELINA
+        -Integer id
+        -String nome
     }
 
     class Sexo {
         <<enumeration>>
         FEMEA
         MACHO
-    }    
-
-    class Servico {
-        +UUID id
-        +String nome
-        +double preço
     }
 
+    %% class Servico {
+    %%     <<abstract>>
+    %%     -UUID id
+    %%     -TipoServico tipoServico
+    %%     -Status status
+    %% }
+
+    %% class Pagamento {
+    %%     -Long id
+    %%     -double desconto
+    %%     -double precoFinal
+    %%     -LocalDateTime dataPagamento
+    %%     -Servico servico
+    %% }
+
     class Consulta {
-        +UUID id
-        +LocalDateTime data
-        +List~Veterinarios~ veterinarios
-        +Pet pet
-        +String observacoes
-        +Servico servico
+        -UUID id
+        -LocalDateTime dataRealizacao
+        -List~Veterinarios~ veterinarios
+        -Pet pet
+        -String observacoes
+        -List~Exame~ exames
+        -List~Prescricao~ prescricoes
+        -TipoConsulta tipoConsulta
+    }
+
+    class TipoConsulta {
+    }
+
+    class Exame {
+        -UUID id
+        -String resultado
+        -LocalDateTime dataRealizacao
+        -TipoExame tipoExame
+    }
+
+    class TipoExame {
+    }
+
+    class TipoServico {
+        <<interface>>
+        -Long id
+        -String nome
+        -String descricao
+        -Double preçoBase        
+    }
+
+    class Prescricao {
+        -UUID id
+        -String medicamento
+        -String posologia
     }
 
     class Endereco {
-        +UUID id
-        +String bairro
-        +long numero
-        +String rua
+        -UUID id
+        -String bairro
+        -long numero
+        -String rua
     }
 
     class Cargo {
-        +int id
-        +String nome
+        -int id
+        -String nome
     }
 
-    class Pagamento {
-        +Servico servico
-        +double desconto
-        +double precoFinal
-    }
-
-    Usuario <|-- Tutor
     Usuario <|-- Veterinario
     Usuario <|-- Recepcionista
-    Usuario "1" --> "1" Cargo : tem
 
-    Pet "1" --> "1" Sexo : tem
-    Pet "1" --> "1" Especie : é de uma
-    Pet "1" --> "1" Consulta : pertence
+    %% Servico <|-- Consulta
+    %% Servico <|-- Exame
+    TipoServico <|-- TipoConsulta
+    TipoServico <|-- TipoExame
+
+    Pet "1..*" --> "1" Raca : é de uma
+    Raca "1..*" --> "1" Especie: pertence
+
+    %% Servico "1" --> "1" TipoServico : tem
+
+    Usuario "1..*" --> "1" Cargo : tem
+
+    Pet "1..*" --> "1" Sexo : tem
+    Pet "1" --> "1..*" Consulta : pertence
 
     Tutor "1" --> "1" Endereco: tem
-    Tutor "1" --> "0..*" Pet : possui
+    Tutor "1" --> "1..*" Pet : possui
 
-    Consulta "1" --> "1" Servico : realiza
     Recepcionista --> Consulta: cadastra
     Recepcionista --> Tutor: cadastra
-    Admin --> Servico: cadastra
 
-    Veterinario "1" --> "1" Especialidade: tem
-    Veterinario "1" --> "1" UF: tem
-    Consulta "1" --> "1..*" Veterinario : é feita
+    Veterinario --> Especialidade: tem
+    Veterinario --> UF: tem
+    Consulta "1..*" --> "1..*" Veterinario : é feita
 
-    Pagamento "1" --> "1" Servico : paga um
+    Consulta "1" -- "0..*" Exame
+    Consulta "1" -- "0..*" Prescricao
+
+    Exame "1..*" -- "1" TipoExame
+    Consulta "1..*" -- "1" TipoConsulta
+
+    %% Pagamento "1" --> "1" Servico : tem
 ```
+
+### Diagrama de Banco de Dados
+![4PawsDbDiagram](./docs//images/4PawsDB.svg)
 
 ## Tecnologias Utilizadas
 
