@@ -89,7 +89,7 @@ INSERT INTO appointment_veterinarian (appointment_id, veterinarian_id) VALUES
 INSERT INTO exams (id, appointment_id, exam_type_id, scheduled_date, result) VALUES
 (random_uuid(), 1, 5, '2025-10-10 09:10:00', 'O paciente apresenta bom estado geral. Boa hidratação. Temperatura corporal dentro da normalidade: 38,5°C. Frequência cardíaca dentro do esperado: 90 bpm. Dentes limpos, sem acúmulo excessivo de tártaro. Pelagem brilhante e sem áreas de alopecia.'),
 (random_uuid(), 1, 1, '2025-10-15 09:10:00', null),
-(random_uuid(), 3, 5, '2024-10-15 09:10:00', null);
+(random_uuid(), 3, 5, '2024-10-15 09:10:00', 'O paciente está OK');
 
 -- Adiciona Prescrições
 INSERT INTO prescriptions (id, appointment_id, medicine, dosage_description) VALUES

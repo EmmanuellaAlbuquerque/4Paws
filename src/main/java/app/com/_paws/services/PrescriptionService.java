@@ -27,7 +27,11 @@ public class PrescriptionService {
 
         UUID vetUUID = this.authService.obtainAuthenticatedUserUUID();
         List<Veterinarian> veterinarians = prescription.getAppointment().getVeterinarians();
-        boolean isVetAuthorized = veterinarians.stream().anyMatch(veterinarian -> veterinarian.getId().equals(vetUUID));
+        boolean isVetAuthorized = veterinarians
+                .stream()
+                .anyMatch(
+                        veterinarian -> veterinarian.getId().equals(vetUUID)
+                );
 
         if (isVetAuthorized) {
             this.prescriptionRepository.deleteById(id);
