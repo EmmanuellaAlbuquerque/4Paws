@@ -75,6 +75,12 @@ public class GlobalExceptionHandler {
         return this.handleExceptions(jwtAuthException, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(PermissionException.class)
+    public ResponseEntity<ErrorResponse> handlePermissionsLackException(PermissionException permissionException) {
+
+        return this.handleExceptions(permissionException, HttpStatus.FORBIDDEN);
+    }
+
     private ResponseEntity<ErrorResponse> handleExceptions(RuntimeException runtimeException, HttpStatus httpStatus) {
 
         return ResponseEntity.status(httpStatus).body(

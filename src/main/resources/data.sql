@@ -45,7 +45,7 @@ INSERT INTO exam_types (base_price, name, description) VALUES
 
 INSERT INTO appointment_types (base_price, name, description) VALUES
 (100.00, 'Consulta de rotina', 'Check-up geral para avaliar a saúde do animal, incluindo exame físico completo e atualização de vacinas.'),
-(120.00, 'Consulta pré-cirúrgica', 'Avaliação completa antes de procedimentos cirúrgicos, incluindo exames pré-operatórios.'),
+(120.00, 'Consulta pós-cirúrgica', 'Avaliação completa após os procedimentos cirúrgicos, incluindo exames pós-operatórios.'),
 (200.00, 'Consulta de emergência', 'Atendimento imediato para casos urgentes como acidentes, intoxicações ou doenças súbitas.'),
 (130.00, 'Consulta odontológica', 'Avaliação da saúde bucal, incluindo exame dos dentes e gengivas.'),
 (150.00, 'Consulta dermatológica', 'Avaliação especializada para problemas de pele, alergias e condições do pelo.'),
@@ -76,19 +76,23 @@ INSERT INTO pets (id, birth_date, weight, tutor_id, breed, name, sex, specie) VA
 -- Adiciona Consulta
 INSERT INTO appointments (appointment_type_id, scheduled_date, pet_id, notes) VALUES
 (1, '2025-10-10 09:00:00', (SELECT id FROM pets WHERE name = 'Dama de Preto'), 'O paciente foi examinado durante a consulta de rotina e não apresenta sinais de infecção ou outras anormalidades aparentes. Para obter informações mais detalhadas sobre o estado de saúde, foi solicitado o exame físico geral e o hemograma completo.'),
-(5, '2025-10-10 10:00:00', (SELECT id FROM pets WHERE name = 'Duquesa'), null);
+(5, '2025-10-10 10:00:00', (SELECT id FROM pets WHERE name = 'Duquesa'), null),
+(2, '2024-10-10 10:00:00', (SELECT id FROM pets WHERE name = 'Duquesa'), null);
 
 -- Adiciona Veterinários a Consulta
 INSERT INTO appointment_veterinarian (appointment_id, veterinarian_id) VALUES
 (1, (SELECT id FROM user_profiles WHERE email = 'tonia-vet@example.com')),
-(2, (SELECT id FROM user_profiles WHERE email = 'tonia-vet@example.com'));
+(2, (SELECT id FROM user_profiles WHERE email = 'tonia-vet@example.com')),
+(3, (SELECT id FROM user_profiles WHERE email = 'benjamin-vet@example.com'));
 
 -- Adiciona Exames
 INSERT INTO exams (id, appointment_id, exam_type_id, scheduled_date, result) VALUES
 (random_uuid(), 1, 5, '2025-10-10 09:10:00', 'O paciente apresenta bom estado geral. Boa hidratação. Temperatura corporal dentro da normalidade: 38,5°C. Frequência cardíaca dentro do esperado: 90 bpm. Dentes limpos, sem acúmulo excessivo de tártaro. Pelagem brilhante e sem áreas de alopecia.'),
-(random_uuid(), 1, 1, '2025-10-15 09:10:00', null);
+(random_uuid(), 1, 1, '2025-10-15 09:10:00', null),
+(random_uuid(), 3, 5, '2024-10-15 09:10:00', null);
 
 -- Adiciona Prescrições
 INSERT INTO prescriptions (id, appointment_id, medicine, dosage_description) VALUES
 (random_uuid(), 1, 'Suplemento vitamínico', 'Administrar 1 comprimido por dia durante 30 dias'),
-(random_uuid(), 1, 'Antiparasitário', 'Aplicar uma dose única, repetir em 3 meses');
+(random_uuid(), 1, 'Antiparasitário', 'Aplicar uma dose única, repetir em 3 meses'),
+(random_uuid(), 3, 'Alantol (Pomada Cicatrizante)', 'Aplicar 1 a 3 vezes ao dia');
