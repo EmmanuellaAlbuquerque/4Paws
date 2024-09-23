@@ -245,4 +245,6 @@ classDiagram
   <img style="border-radius: 50%;" src="https://avatars1.githubusercontent.com/u/57198678?s=460&u=18118f08f358d2615421a0694cc00b1c10b8bba0&v=4" width="100px;" alt="eu"/>
 </a>
 
+Meu Linkedin: [in/emmanuella-albuquerque/](https://www.linkedin.com/in/emmanuella-albuquerque/)
+
 Made with 💜☕ by <a href="https://www.linkedin.com/in/emmanuella-albuquerque/">Manu</a>

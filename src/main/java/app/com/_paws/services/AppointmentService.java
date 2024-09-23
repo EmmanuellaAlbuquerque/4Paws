@@ -42,8 +42,14 @@ public class AppointmentService {
     }
 
     public void updateAppointmentById(Integer appointmentId, AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
-        appointmentDTOForReceptionist.setId(appointmentId);
-        this.receptionistRegisterAppointment(appointmentDTOForReceptionist);
+
+        if (this.appointmentRepository.existsById(appointmentId)) {
+            appointmentDTOForReceptionist.setId(appointmentId);
+            this.receptionistRegisterAppointment(appointmentDTOForReceptionist);
+        }
+        else {
+            throw new NotFoundException("Consulta não encontrada!");
+        }
     }
 
     @Transactional
@@ -89,12 +95,16 @@ public class AppointmentService {
 
         if (prescriptionDTOS != null && !prescriptionDTOS.isEmpty()) {
             List<Prescription> prescriptions = prescriptionDTOS.stream().map((prescriptionDTO -> {
+
+                if (prescriptionDTO.id() != null && !this.prescriptionRepository.existsById(prescriptionDTO.id())) {
+                    throw new NotFoundException("Prescrição não encontrada!");
+                }
+
                 return new Prescription(prescriptionDTO, appointment);
             })).toList();
 
             this.prescriptionRepository.saveAll(prescriptions);
         }
-
 
         List<ExamDTO> examsDTOS = appointmentDTOForVeterinarian.exams();
 
@@ -103,6 +113,10 @@ public class AppointmentService {
 
                 ExamType examType = this.examTypeRepository.findById(examDTO.examTypeId())
                         .orElseThrow(() -> new NotFoundException("Tipo do Exame não encontrado!"));
+
+                if(examDTO.id() != null && !this.examRepository.existsById(examDTO.id())) {
+                    throw new NotFoundException("Exame não encontrado!");
+                }
 
                 return new Exam(examDTO, examType, appointment);
             }).toList();

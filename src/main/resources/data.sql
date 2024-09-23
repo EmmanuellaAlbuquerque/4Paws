@@ -60,12 +60,12 @@ INSERT INTO veterinarians (id, crmv, specialty, uf)
 -- Adiciona Endereço
 
 INSERT INTO addresses (number, neighborhood, street) VALUES
-(190, 'Centro', 'Rua Boa Vista');
+(805, 'Manaíra', 'R. Manoel Arruda Cavalcante');
 
 -- Adiciona Tutor
 
 INSERT INTO tutors (id, address_id, name, phone, cpf) VALUES
-(random_uuid(), 1, 'Manu Albuquerque', '(83) 97087-0821', '388.203.260-00');
+(random_uuid(), 1, 'Manu Albuquerque', '(83) 99371-6599', '388.203.260-00');
 
 -- Adiciona Pets
 

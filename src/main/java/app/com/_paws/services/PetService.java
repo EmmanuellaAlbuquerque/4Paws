@@ -39,7 +39,12 @@ public class PetService {
 
     public void updatePet(UUID id, PetDTO petDTO) {
 
-        petDTO.setId(id);
-        this.registerPet(petDTO);
+        if (this.petRepository.existsById(id)) {
+            petDTO.setId(id);
+            this.registerPet(petDTO);
+        }
+        else {
+            throw new NotFoundException("Pet não encontrado!");
+        }
     }
 }

@@ -60,9 +60,9 @@ public interface VeterinarianControllerDocs {
                     
                     - As Anotações da Consulta (notes);\s
                     
-                    - Os Exames que foram pedidos (exams), se necessário;\s
+                    - Os Exames que foram pedidos (exams), se necessário; (use Id para editar, sem id cria um novo)\s
                     
-                    - E as Prescrições da Consulta (prescriptions), se necessário.\s
+                    - E as Prescrições da Consulta (prescriptions), se necessário. (use Id para editar, sem id cria um novo)\s
                     """
     )
     @ApiResponses(value = {

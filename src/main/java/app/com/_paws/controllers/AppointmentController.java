@@ -35,14 +35,14 @@ public class AppointmentController implements AppointmentControllerDocs {
         return ResponseEntity.ok(AppointmentResponseDTO.fromAppointmentList(appointments));
     }
 
-    @DeleteMapping("{appointmentId}")
+    @DeleteMapping("/{appointmentId}")
     public ResponseEntity<Void> deleteAppointment(@PathVariable(value = "appointmentId") Integer appointmentId) {
 
         this.appointmentService.deleteAppointmentById(appointmentId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("{appointmentId}")
+    @PutMapping("/{appointmentId}")
     public ResponseEntity<Void> updateAppointment(@PathVariable(value = "appointmentId") Integer appointmentId,
                                                   @Valid @RequestBody AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
 

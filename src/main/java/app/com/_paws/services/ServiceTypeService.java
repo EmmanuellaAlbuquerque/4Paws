@@ -104,12 +104,23 @@ public class ServiceTypeService {
 
     public void updateAppointmentType(Integer appointmentTypeId, ServiceTypeDTO appointmentTypeDTO) {
 
-        appointmentTypeDTO.setId(appointmentTypeId);
-        this.registerAppointmentType(appointmentTypeDTO);
+        if (this.appointmentTypeRepository.existsById(appointmentTypeId)) {
+            appointmentTypeDTO.setId(appointmentTypeId);
+            this.registerAppointmentType(appointmentTypeDTO);
+        }
+        else {
+            throw new NotFoundException("Tipo de Consulta não encontrada!");
+        }
     }
 
     public void updateExamType(Integer examTypeId, ServiceTypeDTO examTypeDTO) {
-        examTypeDTO.setId(examTypeId);
-        this.registerExamType(examTypeDTO);
+
+        if (this.examTypeRepository.existsById(examTypeId)) {
+            examTypeDTO.setId(examTypeId);
+            this.registerExamType(examTypeDTO);
+        }
+        else {
+            throw new NotFoundException("Tipo de Exame não encontrado!");
+        }
     }
 }
