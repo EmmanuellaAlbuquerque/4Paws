@@ -2,6 +2,10 @@
 
 O 4Paws é uma API projetada para otimizar e simplificar a gestão de clínicas veterinárias. Oferecendo um conjunto de ferramentas para donos de clínicas veterinários, recepcionistas e veterinários gerenciarem consultas, exames, prescrições, pets e seus respectivos tutores.
 
+## Deploy
+
+[https://4paws-api.up.railway.app/](https://4paws-api.up.railway.app/)
+
 ## Lista de Conteúdos
 
 📌 [Funcionalidades](#funcionalidades)
