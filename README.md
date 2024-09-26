@@ -2,6 +2,36 @@
 
 O 4Paws é uma API projetada para otimizar e simplificar a gestão de clínicas veterinárias. Oferecendo um conjunto de ferramentas para donos de clínicas veterinários, recepcionistas e veterinários gerenciarem consultas, exames, prescrições, pets e seus respectivos tutores.
 
+<details>
+    <summary><b>Consultas</b></summary>
+    <img src="./docs/images/Consultas.png" alt="Consultas">
+</details>
+
+<details>
+    <summary><b>Tutores</b></summary>
+    <img src="./docs/images/Tutores.png" alt="Tutores">
+</details>
+
+<details>
+    <summary><b>Pets</b></summary>
+    <img src="./docs/images/Pets.png" alt="Pets">
+</details>
+
+<details>
+    <summary><b>TiposDeConsulta</b></summary>
+    <img src="./docs/images/TiposDeConsulta.png" alt="TiposDeConsulta">
+</details>
+
+<details>
+    <summary><b>TiposDeExame</b></summary>
+    <img src="./docs/images/TiposDeExame.png" alt="TiposDeExame">
+</details>
+
+<details>
+    <summary><b>Profiles</b></summary>
+    <img src="./docs/images/Profiles.png" alt="Profiles">
+</details>
+
 ## Deploy
 
 [https://4paws-api.up.railway.app/](https://4paws-api.up.railway.app/)
