@@ -4,32 +4,32 @@ O 4Paws é uma API projetada para otimizar e simplificar a gestão de clínicas 
 
 <details>
     <summary><b>Consultas</b></summary>
-    <img src="./docs/images/Consultas.png" alt="Consultas">
+    <img src="./docs/images/Consultas2.png" alt="Consultas">
 </details>
 
 <details>
     <summary><b>Tutores</b></summary>
-    <img src="./docs/images/Tutores.png" alt="Tutores">
+    <img src="./docs/images/Tutores2.png" alt="Tutores">
 </details>
 
 <details>
     <summary><b>Pets</b></summary>
-    <img src="./docs/images/Pets.png" alt="Pets">
+    <img src="./docs/images/Pets2.png" alt="Pets">
 </details>
 
 <details>
     <summary><b>TiposDeConsulta</b></summary>
-    <img src="./docs/images/TiposDeConsulta.png" alt="TiposDeConsulta">
+    <img src="./docs/images/TiposDeConsulta2.png" alt="TiposDeConsulta">
 </details>
 
 <details>
     <summary><b>TiposDeExame</b></summary>
-    <img src="./docs/images/TiposDeExame.png" alt="TiposDeExame">
+    <img src="./docs/images/TiposDeExame2.png" alt="TiposDeExame">
 </details>
 
 <details>
     <summary><b>Profiles</b></summary>
-    <img src="./docs/images/Profiles.png" alt="Profiles">
+    <img src="./docs/images/Profiles2.png" alt="Profiles">
 </details>
 
 ## Deploy
