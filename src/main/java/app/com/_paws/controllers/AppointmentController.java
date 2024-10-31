@@ -21,7 +21,7 @@ public class AppointmentController implements AppointmentControllerDocs {
     private final AppointmentService appointmentService;
 
     @PostMapping("/new")
-    public ResponseEntity<Object> receptionistRegisterAppointment(@Valid @RequestBody AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
+    public ResponseEntity<Void> receptionistRegisterAppointment(@Valid @RequestBody AppointmentDTOForReceptionist appointmentDTOForReceptionist) {
 
         Appointment appointment = this.appointmentService.receptionistRegisterAppointment(appointmentDTOForReceptionist);
 

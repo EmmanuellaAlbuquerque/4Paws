@@ -72,5 +72,5 @@ public interface VeterinarianControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> veterinarianUpdateAppointment(Integer appointmentId, AppointmentDTOForVeterinarian appointmentDTOForVeterinarian);
+    ResponseEntity<Void> veterinarianUpdateAppointment(Integer appointmentId, AppointmentDTOForVeterinarian appointmentDTOForVeterinarian);
 }

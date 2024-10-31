@@ -42,7 +42,7 @@ public interface TutorControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> registerTutor(TutorDTO tutorDTO);
+    ResponseEntity<Void> registerTutor(TutorDTO tutorDTO);
 
     @Operation(
             summary = "Atualiza um Tutor",

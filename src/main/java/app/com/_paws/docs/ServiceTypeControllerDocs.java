@@ -37,7 +37,7 @@ public interface ServiceTypeControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> registerAppointmentType(ServiceTypeDTO appointmentTypeDTO);
+    ResponseEntity<Void> registerAppointmentType(ServiceTypeDTO appointmentTypeDTO);
 
     @Operation(
             summary = "Registra um Tipo de Exame",
@@ -58,7 +58,7 @@ public interface ServiceTypeControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> registerExamType(ServiceTypeDTO examTypeDTO);
+    ResponseEntity<Void> registerExamType(ServiceTypeDTO examTypeDTO);
 
     @Operation(
             summary = "Atualiza um Tipo de Consulta",

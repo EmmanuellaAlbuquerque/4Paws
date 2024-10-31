@@ -27,7 +27,7 @@ public class TutorController implements TutorControllerDocs {
     private final TutorService tutorService;
 
     @PostMapping("/new")
-    public ResponseEntity<Object> registerTutor(@Valid @RequestBody TutorDTO tutorDTO) {
+    public ResponseEntity<Void> registerTutor(@Valid @RequestBody TutorDTO tutorDTO) {
 
         Tutor tutor = tutorService.registerTutor(tutorDTO);
 

@@ -22,21 +22,21 @@ public class SignUpController implements SignUpControllerDocs {
     private final VeterinarianService veterinarianService;
 
     @PostMapping("/receptionists")
-    public ResponseEntity<Object> registerReceptionist(@Valid @RequestBody UserProfileDTO userProfileDTO) {
+    public ResponseEntity<Void> registerReceptionist(@Valid @RequestBody UserProfileDTO userProfileDTO) {
         UserProfile userProfile = userProfileService.registerUserProfile(userProfileDTO, "ROLE_RECEPCIONISTA");
 
         return RegistrationResponseUtil.build(userProfile);
     }
 
     @PostMapping("/admins")
-    public ResponseEntity<Object> registerAdmin(@Valid @RequestBody UserProfileDTO userProfileDTO) {
+    public ResponseEntity<Void> registerAdmin(@Valid @RequestBody UserProfileDTO userProfileDTO) {
         UserProfile userProfile = userProfileService.registerUserProfile(userProfileDTO, "ROLE_ADMIN");
 
         return RegistrationResponseUtil.build(userProfile);
     }
 
     @PostMapping("/veterinarians")
-    public ResponseEntity<Object> registerVeterinarian(@Valid @RequestBody VeterinarianDTO veterinarianDTO) {
+    public ResponseEntity<Void> registerVeterinarian(@Valid @RequestBody VeterinarianDTO veterinarianDTO) {
         Veterinarian veterinarian = veterinarianService.registerVeterinarian(veterinarianDTO);
 
         return  RegistrationResponseUtil.build(veterinarian);

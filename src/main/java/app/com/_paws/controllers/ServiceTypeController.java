@@ -22,7 +22,7 @@ public class ServiceTypeController implements ServiceTypeControllerDocs {
     private final ServiceTypeService serviceTypeService;
 
     @PostMapping("/service-types/appointments-types/new")
-    public ResponseEntity<Object> registerAppointmentType(@Valid @RequestBody ServiceTypeDTO appointmentTypeDTO) {
+    public ResponseEntity<Void> registerAppointmentType(@Valid @RequestBody ServiceTypeDTO appointmentTypeDTO) {
 
         AppointmentType appointmentType = serviceTypeService.registerAppointmentType(appointmentTypeDTO);
 
@@ -30,7 +30,7 @@ public class ServiceTypeController implements ServiceTypeControllerDocs {
     }
 
     @PostMapping("/service-types/exams-types/new")
-    public ResponseEntity<Object> registerExamType(@Valid @RequestBody ServiceTypeDTO examTypeDTO) {
+    public ResponseEntity<Void> registerExamType(@Valid @RequestBody ServiceTypeDTO examTypeDTO) {
 
         ExamType examType = serviceTypeService.registerExamType(examTypeDTO);
 

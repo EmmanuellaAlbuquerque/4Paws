@@ -62,7 +62,7 @@ public class VeterinarianController implements VeterinarianControllerDocs {
     }
 
     @PutMapping("/appointments/{appointmentId}")
-    public ResponseEntity<Object> veterinarianUpdateAppointment(@PathVariable(value = "appointmentId") Integer appointmentId, @Valid @RequestBody AppointmentDTOForVeterinarian appointmentDTOForVeterinarian) {
+    public ResponseEntity<Void> veterinarianUpdateAppointment(@PathVariable(value = "appointmentId") Integer appointmentId, @Valid @RequestBody AppointmentDTOForVeterinarian appointmentDTOForVeterinarian) {
 
         UUID vetUUID = this.authService.obtainAuthenticatedUserUUID();
         Appointment appointment = this.appointmentService.veterinarianUpdateAppointment(appointmentDTOForVeterinarian, appointmentId, vetUUID);

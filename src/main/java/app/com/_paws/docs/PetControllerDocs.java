@@ -44,7 +44,7 @@ public interface PetControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> registerPet(PetDTO petDTO);
+    ResponseEntity<Void> registerPet(PetDTO petDTO);
 
     @Operation(
             summary = "Retorna detalhes de um Pet específico"

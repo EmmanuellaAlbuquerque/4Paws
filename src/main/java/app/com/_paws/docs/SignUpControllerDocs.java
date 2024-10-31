@@ -33,7 +33,7 @@ public interface SignUpControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> registerReceptionist(UserProfileDTO userProfileDTO);
+    ResponseEntity<Void> registerReceptionist(UserProfileDTO userProfileDTO);
 
     @Operation(
             summary = "Registra um Admin",
@@ -56,7 +56,7 @@ public interface SignUpControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> registerAdmin(UserProfileDTO userProfileDTO);
+    ResponseEntity<Void> registerAdmin(UserProfileDTO userProfileDTO);
 
     @Operation(
             summary = "Registra um Veterinário",
@@ -83,5 +83,5 @@ public interface SignUpControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Object> registerVeterinarian(VeterinarianDTO veterinarianDTO);
+    ResponseEntity<Void> registerVeterinarian(VeterinarianDTO veterinarianDTO);
 }

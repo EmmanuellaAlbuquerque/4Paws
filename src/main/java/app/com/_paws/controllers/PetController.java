@@ -21,7 +21,7 @@ public class PetController implements PetControllerDocs {
     private final PetService petService;
 
     @PostMapping("/new")
-    public ResponseEntity<Object> registerPet(@Valid @RequestBody PetDTO petDTO) {
+    public ResponseEntity<Void> registerPet(@Valid @RequestBody PetDTO petDTO) {
 
         Pet pet = this.petService.registerPet(petDTO);
 

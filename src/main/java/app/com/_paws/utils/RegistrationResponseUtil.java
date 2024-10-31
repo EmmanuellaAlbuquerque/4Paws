@@ -6,7 +6,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 public class RegistrationResponseUtil {
-    public static <T> ResponseEntity<Object> build(Identifiable<T> entity) {
+    public static <T> ResponseEntity<Void> build(Identifiable<T> entity) {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(entity.getId())

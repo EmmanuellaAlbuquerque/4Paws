@@ -135,7 +135,7 @@ public interface AppointmentControllerDocs {
                     )
             ),
     })
-    ResponseEntity<Object> receptionistRegisterAppointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist);
+    ResponseEntity<Void> receptionistRegisterAppointment(AppointmentDTOForReceptionist appointmentDTOForReceptionist);
 
     @Operation(
             summary = "Lista todas as Consultas"
