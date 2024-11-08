@@ -34,7 +34,7 @@ public class SecurityConfiguration {
         httpSecurity.authorizeHttpRequests((authz) -> {
 
             authz.requestMatchers(antMatcher("/api/v1/auth/**")).permitAll();
-            authz.requestMatchers(antMatcher("/api/v1/profiles/**")).permitAll();
+            authz.requestMatchers(antMatcher("/api/v1/profile/**")).permitAll();
 
             authz.requestMatchers(antMatcher("/api/v1/sign-up/receptionists")).hasRole("ADMIN");
             authz.requestMatchers(antMatcher("/api/v1/sign-up/veterinarians")).hasRole("ADMIN");
