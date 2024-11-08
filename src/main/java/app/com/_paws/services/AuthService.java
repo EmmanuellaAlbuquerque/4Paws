@@ -3,13 +3,14 @@ package app.com._paws.services;
 import app.com._paws.domain.dtos.LoginDTO;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.domain.repositories.UserProfileRepository;
-import app.com._paws.exceptions.BusinessException;
+import app.com._paws.exceptions.ForbiddenException;
 import app.com._paws.exceptions.JWTAuthException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -120,8 +121,12 @@ public class AuthService {
 
     public UUID obtainAuthenticatedUserUUID() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object authenticatedUUIDString = authentication.getPrincipal();
 
+        if (authentication instanceof AnonymousAuthenticationToken) {
+            throw new ForbiddenException();
+        }
+
+        Object authenticatedUUIDString = authentication.getPrincipal();
         return UUID.fromString((String) authenticatedUUIDString);
     }
 }

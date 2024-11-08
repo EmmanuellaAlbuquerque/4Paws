@@ -81,6 +81,12 @@ public class GlobalExceptionHandler {
         return this.handleExceptions(permissionException, HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorResponse> handleForbiddenException(ForbiddenException forbiddenException) {
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
     private ResponseEntity<ErrorResponse> handleExceptions(RuntimeException runtimeException, HttpStatus httpStatus) {
 
         return ResponseEntity.status(httpStatus).body(
