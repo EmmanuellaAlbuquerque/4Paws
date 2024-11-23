@@ -12,4 +12,6 @@ import java.util.UUID;
 public interface TutorRepository extends JpaRepository<Tutor, UUID>, PagingAndSortingRepository<Tutor, UUID> {
 
     public Optional<Tutor> findByCpf(String cpf);
+
+    public boolean existsByCpf(String cpf);
 }

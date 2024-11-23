@@ -41,6 +41,12 @@ public class TutorService {
         return TutorResponseDTO.fromTutor(tutor);
     }
 
+    public void tutorExistsByCpf(String cpf) {
+        if (!this.tutorRepository.existsByCpf(cpf)) {
+            throw new NotFoundException("CPF não encontrado!");
+        }
+    }
+
     public void updateTutor(UUID tutorId, TutorUpdateDTO tutorUpdateDTO) {
 
         Tutor tutor = this.tutorRepository.findById(tutorId)

@@ -57,4 +57,12 @@ public class TutorController implements TutorControllerDocs {
 
         return ResponseEntity.ok(tutorResponseDTO);
     }
+
+    @GetMapping("/exists-by-cpf")
+    public ResponseEntity<Void> tutorExistsByCpf(@RequestParam("tutorCpf") String tutorCpf) {
+
+        tutorService.tutorExistsByCpf(tutorCpf);
+
+        return ResponseEntity.ok().build();
+    }
 }
