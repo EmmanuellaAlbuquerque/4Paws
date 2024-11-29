@@ -72,4 +72,11 @@ public class TutorService {
                 )
         );
     }
+
+    public TutorResponseDTO findTutorById(UUID tutorId) {
+        Tutor tutor = this.tutorRepository.findById(tutorId)
+                .orElseThrow(() -> new NotFoundException("Tutor não encontrado!"));
+
+        return TutorResponseDTO.fromTutor(tutor);
+    }
 }

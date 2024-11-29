@@ -65,4 +65,9 @@ public class TutorController implements TutorControllerDocs {
 
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/{tutorId}")
+    public ResponseEntity<TutorResponseDTO> tutorExistsByCpf(@PathVariable(value = "tutorId") UUID tutorId) {
+        return ResponseEntity.ok(tutorService.findTutorById(tutorId));
+    }
 }
