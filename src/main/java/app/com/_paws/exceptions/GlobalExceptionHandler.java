@@ -1,11 +1,12 @@
 package app.com._paws.exceptions;
 
 import app.com._paws.domain.dtos.ErrorResponse;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,9 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+
+import static app.com._paws.exceptions.login.LoginErrorType.LOGIN_REVOKED;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -85,6 +88,19 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleForbiddenException(ForbiddenException forbiddenException) {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    @ExceptionHandler(LoginRevokedException.class)
+    public ResponseEntity<ProblemDetail> handleLoginRevoked(LoginRevokedException ex, HttpServletRequest request) {
+
+        String title = "Sessão Expirada";
+        URI instance = URI.create(request.getRequestURI());
+
+        ApiProblemDetail apiProblemDetail = new ApiProblemDetail(title, HttpStatus.FORBIDDEN, ex.getMessage(), instance, LOGIN_REVOKED);
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(ApiProblemDetail.build(apiProblemDetail));
     }
 
     private ResponseEntity<ErrorResponse> handleExceptions(RuntimeException runtimeException, HttpStatus httpStatus) {

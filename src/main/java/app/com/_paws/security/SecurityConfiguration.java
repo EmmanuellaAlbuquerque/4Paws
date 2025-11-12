@@ -1,10 +1,17 @@
 package app.com._paws.security;
 
+import app.com._paws.exceptions.ApiProblemDetail;
+import app.com._paws.exceptions.LoginRevokedException;
 import app.com._paws.services.AuthService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -12,12 +19,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import java.io.IOException;
+import java.net.URI;
+
+import static app.com._paws.exceptions.login.LoginErrorType.LOGIN_REVOKED;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
@@ -55,7 +67,29 @@ public class SecurityConfiguration {
 
             authz.requestMatchers(antMatcher("/api/v1/prescriptions/**")).hasRole("VETERINARIO");
             authz.requestMatchers(antMatcher("/api/v1/exams/**")).hasAnyRole("VETERINARIO", "RECEPCIONISTA");
-        });
+        })
+        .exceptionHandling(ex -> ex
+                .authenticationEntryPoint((request, response, authException) -> {
+
+                    String title = "Sessão Expirada";
+                    URI instance = URI.create(request.getRequestURI());
+
+                    ApiProblemDetail detail = new ApiProblemDetail(title, HttpStatus.FORBIDDEN, "Sessão expirada. Faça login novamente.", instance, LOGIN_REVOKED);
+                    ProblemDetail body = ApiProblemDetail.build(detail);
+
+                    response.setStatus(HttpStatus.FORBIDDEN.value());
+                    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+
+                    ObjectMapper mapper = new ObjectMapper()
+                            .registerModule(new JavaTimeModule())
+                            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+                    mapper.writeValue(response.getOutputStream(), body);
+                })
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+
+                })
+        );
 
         httpSecurity.addFilterBefore(
                 new TokenAuthenticationFilter(authService),

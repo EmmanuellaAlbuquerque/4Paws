@@ -3,8 +3,8 @@ package app.com._paws.services;
 import app.com._paws.domain.dtos.LoginDTO;
 import app.com._paws.domain.models.UserProfile;
 import app.com._paws.domain.repositories.UserProfileRepository;
-import app.com._paws.exceptions.ForbiddenException;
 import app.com._paws.exceptions.JWTAuthException;
+import app.com._paws.exceptions.LoginRevokedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -123,7 +123,7 @@ public class AuthService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof AnonymousAuthenticationToken) {
-            throw new ForbiddenException();
+            throw new LoginRevokedException();
         }
 
         Object authenticatedUUIDString = authentication.getPrincipal();
