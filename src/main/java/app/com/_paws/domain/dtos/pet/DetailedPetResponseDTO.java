@@ -16,7 +16,8 @@ public record DetailedPetResponseDTO (
         String breed,
         String specie,
         Integer age,
-        UUID tutorId
+        UUID tutorId,
+        LocalDate birthDate
 ) {
 
     public static DetailedPetResponseDTO fromPet (Pet pet) {
@@ -28,7 +29,8 @@ public record DetailedPetResponseDTO (
                 pet.getBreed(),
                 pet.getSpecie().getName(),
                 Period.between(pet.getBirthDate(), LocalDate.now()).getYears(),
-                pet.getTutor().getId()
+                pet.getTutor().getId(),
+                pet.getBirthDate()
         );
     }
 }
