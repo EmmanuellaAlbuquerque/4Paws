@@ -32,9 +32,8 @@ O 4Paws é uma API projetada para otimizar e simplificar a gestão de clínicas 
     <img src="./docs/images/Profiles2.png" alt="Profiles">
 </details>
 
-## Deploy
-
-[https://4paws-api.up.railway.app/](https://4paws-api.up.railway.app/)
+## Documentação Swagger
+[http://localhost:8080/swagger-ui/index.htm](http://localhost:8080/swagger-ui/index.html)
 
 ## Lista de Conteúdos
 
